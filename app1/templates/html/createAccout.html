@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BreakingCipher.jp/createAccount.html</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/createAccount.css">
+</head>
+
+<body>
+
+    <div id="header">
+        <nav>
+            <ul>
+                <li><a href="./index.html" id="pageTitle">BreakingCipher.jp</a></li>
+                <li><a href="./sharePlatformSearch.html">暗号投稿記事一覧へ</a></li>
+                <li><a href="./officialCipher.html">xxxxxxxxxx へ</a></li>
+                <li><a href="./login.html" id="user">ログイン</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="main">
+        <h1>アカウント作成</h1>
+        <div id="inputBox">
+            <form action="{% url xxxxxxxx %}" method="POST">
+                {% csrf_token %}
+
+                <!--ユーザーネーム入力欄-->
+                <div class="inBox">
+                    <label for="userName">ユーザーネーム<br>
+                        <input id="userName" name="userNameCreate" type="text" placeholder="User Name" required>
+                    </label>
+                </div>
+
+                <!--パスワード入力欄-->
+                <div class="inBox">
+                    <label for="pssword">パスワード<br>
+                        <input id="password" name="passwordCreate" type="text" placeholder="Password" required>
+                    </label>
+                </div>
+
+                <button type="submit">Go</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

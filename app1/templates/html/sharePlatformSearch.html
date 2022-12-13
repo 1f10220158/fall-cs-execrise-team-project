@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BreakingCipher.jp/sharePlatformSearch.html</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/sharePlatformSearch.css">
+</head>
+
+<body>
+    <div id="header">
+        <nav>
+            <ul>
+                <li><a href="./index.html" id="pageTitle">BreakingCipher.jp</a></li>
+                <li><a href="./sharePlatformSearch.html">暗号投稿記事一覧へ</a></li>
+                <li><a href="./officialCipher.html">xxxxxxxxxx へ</a></li>
+                <li><a href="./majsoul.html" id="user">ログイン</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="leftBox">
+        <div class="articleBox">
+            <div id="inlineBox">
+                <h1>記事一覧</h1>
+                <a src="index.html#HowToPost">このページのヘルプ</a>
+            </div>
+            <p><a href="sharePlatformPost.html">投稿する</a></p>
+        </div>
+
+        <div class="articleBox">
+            <form action="{{% url %}}" method="GET">
+                {% csrf_token %}
+
+                <!--検索ボックス-->
+                <input type="text" id="searchbox" name="searchbox">
+                <button type="submit"><img src="虫眼鏡の画像" alt=""></button>
+            </form>
+        </div>
+
+        <div class="articleBox">
+
+            <!--投稿記事一覧欄-->
+
+        </div>
+    </div>
+
+    <div id="rightBox">
+
+        <!--記事のプレビュー-->
+
+        <form action="{{% url %}}" method="GET">
+            {% csrf_token %}
+            <a href="{{% url %}}">解く</a>
+        </form>
+    </div>
+
+    <script src="../static/index.js" defer></script>
+</body>
+
+</html>
