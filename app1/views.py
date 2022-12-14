@@ -7,13 +7,13 @@ def index(request):
     return render(request, "index.html")
 
 def store_cookie(request):
-    status = request.POST
+    param = request.POST
 
     """
     データベースにユーザ情報登録処理
     """
 
-    return render(request, "index.html", status)
+    return 
 
 def create_account(request):
     return render(request, "createAccount.html")
