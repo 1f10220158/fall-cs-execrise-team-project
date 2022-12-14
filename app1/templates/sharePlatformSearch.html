@@ -1,23 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <title>BreakingCipher.jp/sharePlatformSearch.html</title>
-    <link rel="stylesheet" type="text/css" href="../static/css/sharePlatformSearch.css">
+    <link rel="stylesheet" type="text/css" href="{% static '../static/css/sharePlatformSearch.css' %}">
 </head>
 
 <body>
     <div id="header">
         <nav>
             <ul>
-                <li><a href="./index.html" id="pageTitle">BreakingCipher.jp</a></li>
-                <li><a href="./sharePlatformSearch.html">暗号投稿記事一覧へ</a></li>
-                <li><a href="./officialCipher.html">xxxxxxxxxx へ</a></li>
-                <li><a href="./majsoul.html" id="user">ログイン</a></li>
+                <li><a href="" id="pageTitle">BreakingCipher.jp</a></li>
+                <li><a href="">暗号投稿記事一覧へ</a></li>
+                <li><a href="">xxxxxxxxxx へ</a></li>
+                <li><a href="" id="user">ログイン</a></li>
             </ul>
         </nav>
     </div>
+    <script>
+        if ("{{ userid | safe }}") {
+            const userID = "{{ userid | safe }}";
+            const element = document.getElementById('user');
+            element.textContent = userID;
+        }
+    </script>
 
     <div id="leftBox">
         <div class="articleBox">
@@ -29,7 +37,7 @@
         </div>
 
         <div class="articleBox">
-            <form action="{{% url %}}" method="GET">
+            <form action="{% url %}" method="GET">
                 {% csrf_token %}
 
                 <!--検索ボックス-->
@@ -49,9 +57,9 @@
 
         <!--記事のプレビュー-->
 
-        <form action="{{% url %}}" method="GET">
+        <form action="{% url %}" method="GET">
             {% csrf_token %}
-            <a href="{{% url %}}">解く</a>
+            <a href="{% url %}">解く</a>
         </form>
     </div>
 

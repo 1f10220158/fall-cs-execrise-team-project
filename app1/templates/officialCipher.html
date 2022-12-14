@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BreakingCipher.jp/officialCipher.html</title>
+    <link rel="stylesheet" type="text/css" href="{% static '../static/css/officialCipher.css' %}">
+</head>
+<body>
+    <div id="header">
+        <nav>
+            <ul>
+                <li><a href="" id="pageTitle">BreakingCipher.jp</a></li>
+                <li><a href="">暗号投稿記事一覧へ</a></li>
+                <li><a href="">xxxxxxxxxx へ</a></li>
+                <li><a href="" id="user">ログイン</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script>
+        if ("{{ userid | safe }}") {
+            const userID = "{{ userid | safe }}";
+            const element = document.getElementById('user');
+            element.textContent = userID;
+        }
+    </script>
+
+    <script src="../static/index.js" defer></script>
+</body>
+
+</html>

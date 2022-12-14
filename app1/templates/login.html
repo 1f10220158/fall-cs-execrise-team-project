@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BreakingCipher.jp/createAccount.html</title>
+    <link rel="stylesheet" type="text/css" href="{% static '../static/css/createAccountAndLogin.css' %}">
+</head>
+
+<body>
+    <div id="header">
+        <nav>
+            <ul>
+                <li><a href="" id="pageTitle">BreakingCipher.jp</a></li>
+                <li><a href="">暗号投稿記事一覧へ</a></li>
+                <li><a href="">xxxxxxxxxx へ</a></li>
+                <li><a href="" id="user">ログイン</a></li>
+            </ul>
+        </nav>
+    </div>
+    <script>
+        if ("{{ userid | safe }}") {
+            const userID = "{{ userid | safe }}";
+            const element = document.getElementById('user');
+            element.textContent = userID;
+        }
+    </script>
+
+    <div id="main">
+        <h1>ログイン</h1>
+        <div id="inputBox">
+            <form action="{% url xxxxxxxx %}" method="POST">
+                {% csrf_token %}
+
+                <!--ユーザーネーム入力欄-->
+                <div class="inBox">
+                    <label for="userid">ユーザーネーム<br>
+                        <input id="userid" name="userid" type="text" placeholder="User ID" required>
+                    </label>
+                </div>
+
+                <!--パスワード入力欄-->
+                <div class="inBox">
+                    <label for="password">パスワード<br>
+                        <input id="password" name="password" type="password" placeholder="Password" required>
+                    </label>
+                </div>
+
+                <button type="submit">Go</button>
+            </form>
+            <a href="./createAccout.html">アカウント新規作成はこちら</a>
+        </div>
+    </div>
+
+    <script src="../static/index.js" defer></script>
+</body>
+
+</html>
