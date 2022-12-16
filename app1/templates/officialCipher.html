@@ -20,8 +20,8 @@
 
     <script src="{% static 'index.js' %}" defer></script>
     <script>
-        if ({{ userid | safe }}) {
-            const userID = {{ userid | safe }};
+        if ("{{ userid | safe }}") {
+            const userID = "{{ userid | safe }}";
             const userElement = document.getElementById('user');
             userElement.textContent = userID;
             userElement.removeAttribute("href");
