@@ -13,10 +13,9 @@
     <div id="header">
         <nav>
             <ul>
-                <li><a href="" id="pageTitle">BreakingCipher.jp</a></li>
-                <li><a href="">暗号投稿記事一覧へ</a></li>
-                <li><a href="">xxxxxxxxxx へ</a></li>
-                <li><a href="" id="user">ログイン</a></li>
+                <li><a href="{% url 'index' %}" id="pageTitle">BreakingCipher.jp</a></li>
+                <li><a href="{% url 'sharePlatformSearch' %}">暗号投稿記事一覧へ</a></li>
+                <li><a href="{% url 'login' %}" id="user">ログイン</a></li>
             </ul>
         </nav>
     </div>
@@ -24,20 +23,20 @@
     <div id="main">
         <h1>アカウント作成</h1>
         <div id="inputBox">
-            <form id="pushUserData">
+            <form id="pushUserData" action="{% url 'storeNewAccount' %}" method="POST">
                 {% csrf_token %}
 
                 <!--ユーザーネーム入力欄-->
                 <div class="inBox">
                     <label for="userid">ユーザーID<br>
-                        <input id="userid" type="text" placeholder="User ID" required>
+                        <input id="userid" name="userid" type="text" placeholder="User ID" required>
                     </label>
                 </div>
 
                 <!--パスワード入力欄-->
                 <div class="inBox">
                     <label for="pssword">パスワード<br>
-                        <input id="password" type="text" placeholder="Password" required>
+                        <input id="password" name="password" type="text" placeholder="Password" required>
                     </label>
                 </div>
 
@@ -51,23 +50,21 @@
         /* headerパーツ*/
         if ("{{ userid | safe }}") {
             const userID = "{{ userid | safe }}";
-            const element = document.getElementById('user');
-            element.textContent = userID;
-        }
+            const userElement = document.getElementById('user');
+            userElement.textContent = userID;
+            userElement.removeAttribute("href");
+        };
 
         /* cookie関連 */
-        const pushFromData = document.getElementById('pushUserData');
-
-        pushFromData.addEventListener("submit", (event) => {
-            const userid = document.getElementById('userid').value;
-            const password = document.getElementById('password').value;
-            const userData = {
-                "userid": userid,
-                "password": password,
-            };
-
-            event.preventDefault();
-            window.location.href = "{% url 'index' %}";
+        const pushUserData = document.getElementById('pushUserData');
+        
+        pushUserData.addEventListener("submit", (event) => {
+                    const userid = document.getElementById('userid').value;
+                    const password = document.getElementById('password').value;
+                    const userData = {
+                        "userid": userid,
+                        "password": password,
+                    };
 
             /* cookie保存の詳細:
             
@@ -80,24 +77,18 @@
             const path = '/';
             const maxAge = '60*60*24*30';
             const samesite = 'lax';
+
+            /*userIDをcookieに保存*/
             document.cookie = "userid=" + userid +
                 "; path=" + path +
                 "; max-age=" + maxAge +
                 "; samesite=" + samesite;
 
+            /*passwordをcookieに保存*/
             document.cookie = "password=" + password +
                 "; path=" + path +
                 "; max-age=" + maxAge +
                 "; samesite=" + samesite;
-
-            fetch("{% url 'storeCookie' %}", {
-                method: "POST",
-                header: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(userData)
-
-            })
         })
     </script>
 </body>

@@ -12,25 +12,17 @@
     <div id="header">
         <nav>
             <ul>
-                <li><a href="" id="pageTitle">BreakingCipher.jp</a></li>
-                <li><a href="">暗号投稿記事一覧へ</a></li>
-                <li><a href="">xxxxxxxxxx へ</a></li>
-                <li><a href="" id="user">ログイン</a></li>
+                <li><a href="{% url 'index' %}" id="pageTitle">BreakingCipher.jp</a></li>
+                <li><a href="{% url 'sharePlatformSearch' %}">暗号投稿記事一覧へ</a></li>
+                <li><a href="{% url 'login' %}" id="user">ログイン</a></li>
             </ul>
         </nav>
     </div>
-    <script>
-        if ("{{ userid | safe }}") {
-            const userID = "{{ userid | safe }}";
-            const element = document.getElementById('user');
-            element.textContent = userID;
-        }
-    </script>
 
     <div id="main">
         <h1>ログイン</h1>
         <div id="inputBox">
-            <form action="{% url xxxxxxxx %}" method="POST">
+            <form action="" method="POST">
                 {% csrf_token %}
 
                 <!--ユーザーネーム入力欄-->
@@ -49,11 +41,19 @@
 
                 <button type="submit">Go</button>
             </form>
-            <a href="./createAccout.html">アカウント新規作成はこちら</a>
+            <a href="{% url 'createAccount' %}">アカウント新規作成はこちら</a>
         </div>
     </div>
 
-    <script src="../static/index.js" defer></script>
+    <script src="{% static 'index.js' %}" defer></script>
+    <script>
+        if ("{{ userid | safe }}") {
+            const userID = "{{ userid | safe }}";
+            const userElement = document.getElementById('user');
+            userElement.textContent = userID;
+            userElement.removeAttribute("href");
+        }
+    </script>
 </body>
 
 </html>

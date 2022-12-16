@@ -2,21 +2,32 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
 def index(request):
-    if request.COOKIES.get("userid", False):
+
+    #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
+    if "userid" in request.COOKIES:
         return render(request, "index.html", request.COOKIES)
+    
+    #ない場合は"ログイン"のまま返す
     return render(request, "index.html")
 
-def store_cookie(request):
-    param = request.POST
+def store_new_account(request):
+    userid = request.POST["userid"]
+    password = request.POST["password"]
 
-    """
-    データベースにユーザ情報登録処理
-    """
-
-    return 
+    '''
+    データベースに保存する処理をここに書く
+    '''
+    
+    return redirect(index)
 
 def create_account(request):
     return render(request, "createAccount.html")
 
 def login(request):
     return render(request, "login.html")
+
+def share_platform_post(request):
+    return render(request, "sharePlatformPost.html")
+
+def share_platform_search(request):
+    return render(request, "sharePlatformSearch.html")
