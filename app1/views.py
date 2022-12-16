@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from app1.models import Article
 #from app1.models import #モデル名
 
 def index(request):
@@ -53,10 +54,13 @@ def share_platform_post(request):
     return render(request, "sharePlatformPost.html")
 
 def share_platform_search(request):
+    context = {
+        'articles' : Article.objects.all()
+        }
     
     #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
     if "userid" in request.COOKIES:
-        return render(request, "sharePlatformSearch.html", request.COOKIES)
+        return render(request, "sharePlatformSearch.html", {request.COOKIES, context})
     
     #ない場合は"ログイン"のまま返す
-    return render(request, "sharePlatformSearch.html")
+    return render(request, "sharePlatformSearch.html", context)

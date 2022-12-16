@@ -41,7 +41,16 @@
         <div class="articleBox">
 
             <!--投稿記事一覧欄-->
-
+            {% if articles %}
+            {% for article in articles %}
+            <a>{{ article.title }}</a>
+            <div>
+                {{ article.contents }}
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>No article.</p>
+            {% endif %}
         </div>
     </div>
 
