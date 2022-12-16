@@ -26,13 +26,37 @@ def store_new_account(request):
     return redirect(index)
 
 def create_account(request):
+    
+    #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
+    if "userid" in request.COOKIES:
+        return render(request, "createAccount.html", request.COOKIES)
+    
+    #ない場合は"ログイン"のまま返す
     return render(request, "createAccount.html")
 
 def login(request):
+    
+    #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
+    if "userid" in request.COOKIES:
+        return render(request, "login.html", request.COOKIES)
+    
+    #ない場合は"ログイン"のまま返す
     return render(request, "login.html")
 
 def share_platform_post(request):
+    
+    #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
+    if "userid" in request.COOKIES:
+        return render(request, "sharePlatformPost.html", request.COOKIES)
+    
+    #ない場合は"ログイン"のまま返す
     return render(request, "sharePlatformPost.html")
 
 def share_platform_search(request):
+    
+    #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
+    if "userid" in request.COOKIES:
+        return render(request, "sharePlatformSearch.html", request.COOKIES)
+    
+    #ない場合は"ログイン"のまま返す
     return render(request, "sharePlatformSearch.html")
