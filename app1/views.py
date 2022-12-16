@@ -16,7 +16,7 @@ def store_new_account(request):
     password = request.POST["password"]
 
     #ユーザidとパスワードをデータベースに保存
-    user_data = User(userid=userid, password=password)
+    user_data = User(user_id=userid, password=password)
     user_data.save()
     
     return redirect(index)
