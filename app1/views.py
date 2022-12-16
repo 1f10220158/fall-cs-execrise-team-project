@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
-#from app1.models import #モデル名
+from app1.models import *
 
 def index(request):
 
@@ -15,13 +15,9 @@ def store_new_account(request):
     userid = request.POST["userid"]
     password = request.POST["password"]
 
-    '''
-    データベースに保存する処理をここに書く
-
-    userdata = モデル名(idのカラム名=userid, passのカラム名=password)
-    userdata.save()
-
-    '''
+    #ユーザidとパスワードをデータベースに保存
+    user_data = User(userid=userid, password=password)
+    user_data.save()
     
     return redirect(index)
 

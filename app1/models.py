@@ -11,7 +11,7 @@ class User(models.Model):
 
 class Article(models.Model):
     article_id = models.CharField(max_length=200, primary_key=True)
-    user_id = models.ForeignKey(
+    user_id = models.OneToOneField(
         User,
         on_delete = models.CASCADE,
         )
@@ -22,7 +22,7 @@ class Article(models.Model):
         return self.article_id
 
 class TimeforOfficial(models.Model):
-    user_id = models.ForeignKey(
+    user_id = models.OneToOneField(
         User,
         on_delete = models.CASCADE,
         primary_key = True,
