@@ -43,9 +43,12 @@
             <!--投稿記事一覧欄-->
             {% if articles %}
             {% for article in articles %}
-            <a>{{ article.title }}</a>
+            <p>{{ article.title }}</p>
             <div>
-                {{ article.contents }}
+                {{ article.userID }}
+            </div>
+            <div>
+                {{ article.content }}
             </div>
             {% endfor %}
             {% else %}
