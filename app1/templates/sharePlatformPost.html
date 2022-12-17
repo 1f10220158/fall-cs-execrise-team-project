@@ -32,7 +32,7 @@
                     <p>投稿するユーザーIDの選択</p>
                     <ul>
                         <li>
-                            <label for="loginUserID"><input type="radio" name="userID" value="loginUserID"
+                            <label for="loginUserID"><input type="radio" name="userID" value="longinUserID"
                                     id="loginUserID">ログイン中のユーザーID</label>
                         </li>
                         <li>
@@ -51,9 +51,12 @@
 
                 <div id="rightBox">
                     <p>pdfアップロード</p>
-
-                    <!--pdfアップロード欄-->
-
+                        <div id="dropBox">
+                            <p>ファイルをドロップ</p>
+                            <div id="preview">
+                            </div>
+                        </div>
+                    <input type="file" id="userFile">
                 </div>
 
                 <button type="submit">投稿する</button>
@@ -69,6 +72,40 @@
             userElement.textContent = userID;
             userElement.removeAttribute("href");
         }
+
+        /* 投稿機能 */
+        const dropBoxElement = document.getElementById("dropBox");
+        const inputFileElement = document.getElementById('userFile');
+        const previewElement = document.getElementById("preview");
+
+        //ドラッグした時の処理
+        dropBoxElement.addEventListener("dragover", (event) => {
+            event.preventDefault();
+        });
+
+        //ドラッグをやめた時の処理
+        dropBoxElement.addEventListener("dragleave", (event) => {
+
+        });
+
+        //ドロップorアップロードした時の処理
+        dropBoxElement.addEventListener("drop", (event) => {
+            event.preventDefault();
+		        inputFileElement.files = event.dataTransfer.files;
+		        inputFileElement.dispatchEvent(new Event('change'));
+        });
+
+        //実際にデプロイしないと動作がわからない場所
+        inputFileElement.addEventListener('change', () => {
+            const iframe = '<iframe width="50%" height="50%"></iframe>';
+            const url = URL.createObjectURL(inputFileElement.files[0]);
+            iframe.src = url;
+            previewElement.innerHTML = iframe;
+        });
+
+        //
+
+
     </script>
 </body>
 
