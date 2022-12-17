@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BreakingCipher.jp/sharePlatformSearch.html</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sharePlatformPost.css' %}">
+</head>
+
+<body>
+    <div id="header">
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}" id="pageTitle">BreakingCipher.jp</a></li>
+                <li><a href="{% url 'sharePlatformSearch' %}">暗号投稿記事一覧へ</a></li>
+                <li><a href="{% url 'login' %}" id="user">ログイン</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="main">
+        <div class="articleBox">
+            <h1>記事一覧</h1>
+            <a src="index.html#HowToPost">このページのヘルプ</a>
+        </div>
+
+        <div class="articleBox">
+            <form action="" method="POST">
+                <div id="leftBox">
+                    {% csrf_token %}
+                    <p>投稿するユーザーIDの選択</p>
+                    <ul>
+                        <li>
+                            <label for="loginUserID"><input type="radio" name="userID" value="longinUserID"
+                                    id="loginUserID">ログイン中のユーザーID</label>
+                        </li>
+                        <li>
+                            <label for="anonymousID"><input type="radio" name="userID" value="anonymousID"
+                                    id="anonymousID" checked>匿名ID</label>
+                        </li>
+                    </ul>
+
+                    <label for="title">タイトル<br>
+                        <input type="text" id="title" name="title" placeholder="タイトル" required></label><br>
+
+                    <label for="contents">内容<br>
+                        <textarea name="contents" id="contents" placeholder="暗号の説明" required></textarea></label>
+
+                </div>
+
+                <div id="rightBox">
+                    <p>pdfアップロード</p>
+                        <div id="dropBox">
+                            <p>ファイルをドロップ</p>
+                            <div id="preview">
+                            </div>
+                        </div>
+                    <input type="file" id="userFile">
+                </div>
+
+                <button type="submit">投稿する</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'index.js' %}" defer></script>
+    <script>
+        if ("{{ userid | safe }}") {
+            const userID = "{{ userid | safe }}";
+            const userElement = document.getElementById('user');
+            userElement.textContent = userID;
+            userElement.removeAttribute("href");
+        }
+
+        /* 投稿機能 */
+        const dropBoxElement = document.getElementById("dropBox");
+        const inputFileElement = document.getElementById('userFile');
+        const previewElement = document.getElementById("preview");
+
+        //ドラッグした時の処理
+        dropBoxElement.addEventListener("dragover", (event) => {
+            event.preventDefault();
+        });
+
+        //ドラッグをやめた時の処理
+        dropBoxElement.addEventListener("dragleave", (event) => {
+
+        });
+
+        //ドロップorアップロードした時の処理
+        dropBoxElement.addEventListener("drop", (event) => {
+            event.preventDefault();
+		        inputFileElement.files = event.dataTransfer.files;
+		        inputFileElement.dispatchEvent(new Event('change'));
+        });
+
+        //実際にデプロイしないと動作がわからない場所
+        inputFileElement.addEventListener('change', () => {
+            const iframe = '<iframe width="50%" height="50%"></iframe>';
+            const url = URL.createObjectURL(inputFileElement.files[0]);
+            iframe.src = url;
+            previewElement.innerHTML = iframe;
+        });
+
+        //
+
+
+    </script>
+</body>
+
+</html>
