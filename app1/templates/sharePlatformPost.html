@@ -26,7 +26,7 @@
         </div>
 
         <div class="articleBox">
-            <form action="" method="POST">
+            <form id="articlePush">
                 <div id="leftBox">
                     {% csrf_token %}
                     <p>投稿するユーザーIDの選択</p>
@@ -44,8 +44,8 @@
                     <label for="title">タイトル<br>
                         <input type="text" id="title" name="title" placeholder="タイトル" required></label><br>
 
-                    <label for="contents">内容<br>
-                        <textarea name="contents" id="contents" placeholder="暗号の説明" required></textarea></label>
+                    <label for="content">内容<br>
+                        <textarea name="content" id="content" placeholder="暗号の説明" required></textarea></label>
 
                 </div>
 
@@ -56,7 +56,7 @@
                             <div id="preview">
                             </div>
                         </div>
-                    <input type="file" id="userFile">
+                    <input type="file" id="articleData" name="articleData" required>
                 </div>
 
                 <button type="submit">投稿する</button>
@@ -75,7 +75,7 @@
 
         /* 投稿機能 */
         const dropBoxElement = document.getElementById("dropBox");
-        const inputFileElement = document.getElementById('userFile');
+        const inputFileElement = document.getElementById('articleData');
         const previewElement = document.getElementById("preview");
 
         //ドラッグした時の処理
@@ -91,8 +91,10 @@
         //ドロップorアップロードした時の処理
         dropBoxElement.addEventListener("drop", (event) => {
             event.preventDefault();
-		        inputFileElement.files = event.dataTransfer.files;
+            if (event.dataTransfer.files.length > 0) {
+                inputFileElement.files = event.dataTransfer.files;
 		        inputFileElement.dispatchEvent(new Event('change'));
+            }
         });
 
         //実際にデプロイしないと動作がわからない場所
@@ -103,9 +105,45 @@
             previewElement.innerHTML = iframe;
         });
 
-        //
+       //submitした後の処理
+        const articlePushElement = document.getElementById("articlePush");
+        articlePushElement.addEventListener("submit", (event) =>{
+            event.preventDefault();
+            const userIDValue = articlePushElement.elements["userID"].value
 
+            //ログイン中のIDを使う場合
+            if (userIDValue == "loginUserID") {
 
+                //ログインしていたら投稿
+                if (document.cookie.split('; ')
+                .find(row => row.startsWith('userid'))
+                .split('=')[1]) {
+                    const form = new FormData(articlePushElement);
+                    fetch("{% url 'sharePlatformPost' %}", {
+                        method: "POST", 
+                        body: form
+                    })
+
+                    window.location.href = "{% url 'index' %}"
+                }
+                
+                //ログインしていなかったら警告
+                else {
+                    alert("ログインしてません");
+                };
+            }
+
+            //匿名を使う場合
+            else {
+                    const form = new FormData(articlePushElement);
+                    fetch("{% url 'sharePlatformPost' %}", {
+                        method: "POST",
+                        body: form
+                    })
+
+                    window.location.href = "{% url 'index' %}"
+            } 
+        })
     </script>
 </body>
 
