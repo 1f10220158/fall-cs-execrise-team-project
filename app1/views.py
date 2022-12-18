@@ -61,7 +61,6 @@ def share_platform_post(request):
                 content = request.POST["content"]
             )
         article.save()
-        return redirect(index)
             
 def share_platform_search(request):
     context = {

@@ -28,7 +28,7 @@ class Article(models.Model):
     )
     article_data = models.FileField(upload_to='', null=True)
     time = models.DateTimeField(default=timezone.now)
-    title = models.CharField(max_length=200, default='default', unique=False)
+    title = models.CharField(max_length=200, default='default')
     content = models.TextField(null=True, unique=False)
 
     def __str__(self):
