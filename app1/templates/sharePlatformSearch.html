@@ -52,7 +52,9 @@
             </div>
             {% endfor %}
             {% else %}
-            <p>No article.</p>
+            <div>
+                <p onclick="preview()">No article.</p>
+            </div>
             {% endif %}
         </div>
     </div>
@@ -60,6 +62,7 @@
     <div id="rightBox">
 
         <!--記事のプレビュー-->
+        <img id="preview">
 
         <form action="" method="GET">
             {% csrf_token %}
