@@ -17,7 +17,7 @@ class Article(models.Model):
     article_id = models.CharField(
         primary_key = True,
         editable = False,
-        max_length = 32,
+        max_length = 40,
         default = ""
     )
     user_id = models.ForeignKey(

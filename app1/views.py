@@ -47,7 +47,7 @@ def share_platform_post(request):
     else:
         if request.POST["userID"] == "loginUserID":
             article = Article(
-                article_id = str(uuid.uuid4),
+                article_id = str(uuid.uuid4()),
                 user_id = request.COOKIES["userid"],
                 article_data = request.FILES["articleData"],
                 title = request.POST["title"],
@@ -55,12 +55,13 @@ def share_platform_post(request):
             )
         else:
             article = Article(
-                article_id = str(uuid.uuid4),
+                article_id = str(uuid.uuid4()),
                 article_data = request.FILES["articleData"],
                 title = request.POST["title"],
                 content = request.POST["content"]
             )
         article.save()
+        return HttpResponse("uploaded")
             
 def share_platform_search(request):
     context = {
