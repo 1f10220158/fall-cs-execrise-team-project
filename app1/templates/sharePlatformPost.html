@@ -76,7 +76,7 @@
         /* 投稿機能 */
         const dropBoxElement = document.getElementById("dropBox");
         const inputFileElement = document.getElementById('articleData');
-        const previewElement = document.getElementById("preview");
+        const instantPreviewElement = document.getElementById("preview");
 
         //ドラッグした時の処理
         dropBoxElement.addEventListener("dragover", (event) => {
@@ -98,18 +98,18 @@
         });
 
         //実際にデプロイしないと動作がわからない場所
-        inputFileElement.addEventListener('change', () => {
-            const iframe = '<iframe width="50%" height="50%"></iframe>';
-            const url = URL.createObjectURL(inputFileElement.files[0]);
-            iframe.src = url;
-            previewElement.innerHTML = iframe;
+        inputFileElement.addEventListener('change', event => {
+            const url = window.URL.createObjectURL(event.target.files[0]);
+            instantPreviewElement.innerHTML = 
+            '<iframe src="' + url + '#page=1&scrollbar=0" width="50%" height="50%"' +
+            ' scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>';
         });
 
        //submitした後の処理
         const articlePushElement = document.getElementById("articlePush");
-        articlePushElement.addEventListener("submit", (event) =>{
+        articlePushElement.addEventListener("submit", (event) => {
             event.preventDefault();
-            const userIDValue = articlePushElement.elements["userID"].value
+            const userIDValue = articlePushElement.userID
             function postFormData() {
                 const form = new FormData(articlePushElement);
                     fetch("{% url 'sharePlatformPost' %}", {
@@ -121,12 +121,12 @@
             }
 
             //ログイン中のIDを使う場合
-            if (userIDValue == "loginUserID") {
+            if (userIDValue[0].checked) {
 
                 //ログインしていたら投稿
                 if (document.cookie.split('; ')
                 .find(row => row.startsWith('userid'))
-                .split('=')[1]) {
+                ) {
                     postFormData()
                 }
                 
