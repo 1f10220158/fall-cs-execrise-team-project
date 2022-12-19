@@ -42,18 +42,24 @@
 
             <!--投稿記事一覧欄-->
             {% if articles %}
-            {% for article in articles %}
-            <p>{{ article.title }}</p>
-            <div>
-                {{ article.userID }}
-            </div>
-            <div>
-                {{ article.content }}
-            </div>
-            {% endfor %}
+
+                {% for article in articles %}
+                <div class="article">
+                    <h2>{{ article.title }}</h2>
+                        
+                        {% if article.user_id %}
+                            <p>{{ article.user_id }}</p><br>
+                        {% else %}
+                            <p>匿名ID</p><br>
+                        {% endif %}
+
+                    <p>{{ article.content }}</p>
+                </div>
+                {% endfor %}
+
             {% else %}
-            <div>
-                <p onclick="preview()">No article.</p>
+            <div class="article">
+                <p>記事がありません。</p>
             </div>
             {% endif %}
         </div>
@@ -62,7 +68,7 @@
     <div id="rightBox">
 
         <!--記事のプレビュー-->
-        <img id="preview">
+        <div id="preview"></div>
 
         <form action="" method="GET">
             {% csrf_token %}

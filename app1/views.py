@@ -44,12 +44,15 @@ def share_platform_post(request):
     return render(request, "sharePlatformPost.html")
 
 def share_platform_search(request):
-    context = {
-        "articles": Article.objects.all()
-    }
+        
     
+
+    return HttpResponse(Article.objects.all()[0])
+    
+    '''
     if "userid" in request.COOKIES:
-        return render(request, "sharePlatformSearch.html", {request.COOKIES, context})
+        return render(request, "sharePlatformSearch.html", context.update(request.COOKIES))
     
     #ない場合は"ログイン"のまま返す
     return render(request, "sharePlatformSearch.html", context)
+    '''
