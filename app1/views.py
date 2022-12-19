@@ -35,6 +35,7 @@ def login(request):
     return render(request, "login.html")
 
 def share_platform_post(request):
+    #GETの場合
     if request.method == "GET":
 
         if "userid" in request.COOKIES:
@@ -42,7 +43,10 @@ def share_platform_post(request):
 
         return render(request, "sharePlatformPost.html", request.COOKIES)
     
+    #POSTの場合
     else:
+
+        #ログインしているuseridで投稿する場合
         if request.POST["userID"] == "loginUserID":
             article = Article(
                 article_id = str(uuid.uuid4()),
@@ -51,6 +55,8 @@ def share_platform_post(request):
                 title = request.POST["title"],
                 content = request.POST["content"]
             )
+        
+        #匿名で投稿する場合
         else:
             article = Article(
                 article_id = str(uuid.uuid4()),
@@ -62,18 +68,13 @@ def share_platform_post(request):
         return HttpResponse("uploaded")
             
 def share_platform_search(request):
-        
-    
+    context = {
+        "articles": Article.objects.all()
+    }
 
-    return HttpResponse(Article.objects.all()[0])
-    
-    '''
     if "userid" in request.COOKIES:
         return render(request, "sharePlatformSearch.html", context.update(request.COOKIES))
-    
-    
+
     #ない場合は"ログイン"のまま返す
     return render(request, "sharePlatformSearch.html", context)
-    '''
-
 

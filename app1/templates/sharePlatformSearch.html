@@ -44,7 +44,7 @@
             {% if articles %}
 
                 {% for article in articles %}
-                <div class="article">
+                <a class="article" onclick="preview('{{ article.article_data.url }}')">
                     <h2>{{ article.title }}</h2>
                         
                         {% if article.user_id %}
@@ -54,7 +54,7 @@
                         {% endif %}
 
                     <p>{{ article.content }}</p>
-                </div>
+                </a>
                 {% endfor %}
 
             {% else %}
@@ -70,9 +70,11 @@
         <!--記事のプレビュー-->
         <div id="preview"></div>
 
-        <form action="" method="GET">
+        <form method="POST" action="">
             {% csrf_token %}
-            <a href="">解く</a>
+            <label for="answer">解
+                <input type="text" id="answer" name="answer" placeholder="答えを入力する" required></label>
+                <button type="submit">送信</button>
         </form>
     </div>
 
@@ -83,6 +85,14 @@
             const userElement = document.getElementById('user');
             userElement.textContent = userID;
             userElement.removeAttribute("href");
+        }
+
+        //記事を表示する機能
+        const previewElement = document.getElementById("preview");
+        function preview(articleData) {
+            const iframe = '<iframe src="' + articleData + '#page=1&scrollbar=0" width="100%" height="100%"' +
+            ' scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>'
+            previewElement.innerHTML = iframe;
         }
     </script>
 </body>
