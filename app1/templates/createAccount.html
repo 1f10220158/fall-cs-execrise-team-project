@@ -23,7 +23,7 @@
     <div id="main">
         <h1>アカウント作成</h1>
         <div id="inputBox">
-            <form id="pushUserData" action="{% url 'storeNewAccount' %}" method="POST">
+            <form id="pushUserData" action="{% url 'createAccount' %}" method="POST">
                 {% csrf_token %}
 
                 <!--ユーザーネーム入力欄-->

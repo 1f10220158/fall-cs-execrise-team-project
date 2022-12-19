@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from app1.models import *
-#from app1.models import #モデル名
+import uuid
 
 def index(request):
 
@@ -12,22 +12,20 @@ def index(request):
     #ない場合は"ログイン"のまま返す
     return render(request, "index.html")
 
-def store_new_account(request):
-    userid = request.POST["userid"]
-    password = request.POST["password"]
-
-    #ユーザidとパスワードをデータベースに保存
-    user_data = User(user_id=userid, password=password)
-    user_data.save()
-    
-    return redirect(index)
-
 def create_account(request):
+    if request.method == "GET":
+        if "userid" in request.COOKIES:
+            return render(request, "createAccount.html", request.COOKIES)
     
-    if "userid" in request.COOKIES:
-        return render(request, "createAccount.html", request.COOKIES)
-    
-    return render(request, "createAccount.html")
+        return render(request, "createAccount.html")
+    else:
+            userid = request.POST["userid"]
+            password = request.POST["password"]
+
+            #ユーザidとパスワードをデータベースに保存
+            user_data = User(user_id=userid, password=password)
+            user_data.save()
+            return redirect(index)
 
 def login(request):
     
@@ -37,12 +35,32 @@ def login(request):
     return render(request, "login.html")
 
 def share_platform_post(request):
-    
-    if "userid" in request.COOKIES:
+    if request.method == "GET":
+
+        if "userid" in request.COOKIES:
+            return render(request, "sharePlatformPost.html", request.COOKIES)
+
         return render(request, "sharePlatformPost.html", request.COOKIES)
     
-    return render(request, "sharePlatformPost.html")
-
+    else:
+        if request.POST["userID"] == "loginUserID":
+            article = Article(
+                article_id = str(uuid.uuid4()),
+                user_id = request.COOKIES["userid"],
+                article_data = request.FILES["articleData"],
+                title = request.POST["title"],
+                content = request.POST["content"]
+            )
+        else:
+            article = Article(
+                article_id = str(uuid.uuid4()),
+                article_data = request.FILES["articleData"],
+                title = request.POST["title"],
+                content = request.POST["content"]
+            )
+        article.save()
+        return HttpResponse("uploaded")
+            
 def share_platform_search(request):
         
     
@@ -53,6 +71,9 @@ def share_platform_search(request):
     if "userid" in request.COOKIES:
         return render(request, "sharePlatformSearch.html", context.update(request.COOKIES))
     
+    
     #ない場合は"ログイン"のまま返す
     return render(request, "sharePlatformSearch.html", context)
     '''
+
+
