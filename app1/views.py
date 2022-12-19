@@ -12,22 +12,20 @@ def index(request):
     #ない場合は"ログイン"のまま返す
     return render(request, "index.html")
 
-def store_new_account(request):
-    userid = request.POST["userid"]
-    password = request.POST["password"]
-
-    #ユーザidとパスワードをデータベースに保存
-    user_data = User(user_id=userid, password=password)
-    user_data.save()
-    
-    return redirect(index)
-
 def create_account(request):
+    if request.method == "GET":
+        if "userid" in request.COOKIES:
+            return render(request, "createAccount.html", request.COOKIES)
     
-    if "userid" in request.COOKIES:
-        return render(request, "createAccount.html", request.COOKIES)
-    
-    return render(request, "createAccount.html")
+        return render(request, "createAccount.html")
+    else:
+            userid = request.POST["userid"]
+            password = request.POST["password"]
+
+            #ユーザidとパスワードをデータベースに保存
+            user_data = User(user_id=userid, password=password)
+            user_data.save()
+            return redirect(index)
 
 def login(request):
     

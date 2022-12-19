@@ -110,6 +110,15 @@
         articlePushElement.addEventListener("submit", (event) =>{
             event.preventDefault();
             const userIDValue = articlePushElement.elements["userID"].value
+            function postFormData() {
+                const form = new FormData(articlePushElement);
+                    fetch("{% url 'sharePlatformPost' %}", {
+                        method: "POST", 
+                        body: form
+                    })
+
+                    window.location.href = "{% url 'index' %}"
+            }
 
             //ログイン中のIDを使う場合
             if (userIDValue == "loginUserID") {
@@ -118,13 +127,7 @@
                 if (document.cookie.split('; ')
                 .find(row => row.startsWith('userid'))
                 .split('=')[1]) {
-                    const form = new FormData(articlePushElement);
-                    fetch("{% url 'sharePlatformPost' %}", {
-                        method: "POST", 
-                        body: form
-                    })
-
-                    window.location.href = "{% url 'index' %}"
+                    postFormData()
                 }
                 
                 //ログインしていなかったら警告
@@ -135,13 +138,7 @@
 
             //匿名を使う場合
             else {
-                    const form = new FormData(articlePushElement);
-                    fetch("{% url 'sharePlatformPost' %}", {
-                        method: "POST",
-                        body: form
-                    })
-
-                    window.location.href = "{% url 'index' %}"
+                postFormData()
             } 
         })
     </script>
