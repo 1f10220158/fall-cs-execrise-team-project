@@ -13,19 +13,23 @@ def index(request):
     return render(request, "index.html")
 
 def create_account(request):
+
+    #GETの場合
     if request.method == "GET":
         if "userid" in request.COOKIES:
             return render(request, "createAccount.html", request.COOKIES)
     
         return render(request, "createAccount.html")
+    
+    #POSTの場合
     else:
-            userid = request.POST["userid"]
-            password = request.POST["password"]
+        userid = request.POST["userid"]
+        password = request.POST["password"]
 
-            #ユーザidとパスワードをデータベースに保存
-            user_data = User(user_id=userid, password=password)
-            user_data.save()
-            return redirect(index)
+        #ユーザidとパスワードをデータベースに保存
+        user_data = User(user_id=userid, password=password)
+        user_data.save()
+        return redirect(create_account_end)
 
 def login(request):
     
@@ -68,13 +72,29 @@ def share_platform_post(request):
         return HttpResponse("uploaded")
             
 def share_platform_search(request):
-    context = {
-        "articles": Article.objects.all()
-    }
-
     if "userid" in request.COOKIES:
-        return render(request, "sharePlatformSearch.html", context.update(request.COOKIES))
+        context = {
+            "articles": list(Article.objects.all().values()),
+            "userid" : request.COOKIES["userid"],
+            "password" : request.COOKIES["password"],
+        }
 
-    #ない場合は"ログイン"のまま返す
+        return render(request, "sharePlatformSearch.html", context)
+    context = {
+            "articles": Article.objects.all(),
+        }
+
     return render(request, "sharePlatformSearch.html", context)
+
+def share_platform_post_end(request):
+        if "userid" in request.COOKIES:
+            return render(request, "sharePlatformPostEnd.html", request.COOKIES)
+
+        return render(request, "sharePlatformPostEnd.html", request.COOKIES)
+    
+def create_account_end(request):
+        if "userid" in request.COOKIES:
+            return render(request, "createAccountEnd.html", request.COOKIES)
+
+        return render(request, "createAccountEnd.html", request.COOKIES)
 

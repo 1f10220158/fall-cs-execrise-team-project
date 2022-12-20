@@ -22,7 +22,7 @@
     <div id="main">
         <div class="articleBox">
             <h1>記事一覧</h1>
-            <a src="index.html#HowToPost">このページのヘルプ</a>
+            <a href="{% url 'index' %}#HowToPost">このページのヘルプ</a>
         </div>
 
         <div class="articleBox">
@@ -117,16 +117,14 @@
                         body: form
                     })
 
-                    window.location.href = "{% url 'index' %}"
+                    window.location.href = "{% url 'sharePlatformPostEnd' %}"
             }
 
             //ログイン中のIDを使う場合
             if (userIDValue[0].checked) {
 
                 //ログインしていたら投稿
-                if (document.cookie.split('; ')
-                .find(row => row.startsWith('userid'))
-                ) {
+                if ("{{ userid | safe }}") {
                     postFormData()
                 }
                 

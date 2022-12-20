@@ -7,4 +7,6 @@ urlpatterns = [
     path("login", views.login, name="login"),
     path("sharePlatformPost", views.share_platform_post, name="sharePlatformPost"),
     path("sharePlatformSearch", views.share_platform_search, name="sharePlatformSearch"),
+    path("createAccountEnd", views.create_account_end, name="createAccountEnd"),
+    path("sharePlatformPostEnd", views.share_platform_post_end, name="sharePlatformPostEnd"),
 ]
