@@ -29,7 +29,7 @@ def create_account(request):
         #ユーザidとパスワードをデータベースに保存
         user_data = User(user_id=userid, password=password)
         user_data.save()
-        return redirect(create_account_end)
+        return render(request, "createAccountEnd.html", request.COOKIES)
 
 def login(request):
     

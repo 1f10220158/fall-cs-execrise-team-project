@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+body {
+	height: 100%; /*高さを100%にして描画エリアをとる*/
+    margin: 0;
+}
+
+#particles-js { 
+	width: 100%;
+	height: 100%;
+	background-color:#040828; /*背景色*/
+    z-index: -1;
+    position: fixed;
+}
+
+#wrapper {
+    position: relative;
+    z-index: 2;
+    width:100%;
+    height: 100%;
+    overflow: auto;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+ nav ul{
+    display: flex;
+    list-style: none;
+    background-color: white;
+    position: fixed;
+    z-index: 3;
+    padding: 12px 0px;
+    width: 400px;
+    margin-top: 16px;
+    border-radius: 10px;
+    justify-content: center;
+    border: 1px solid rgb(177, 177, 177);
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
+    left: calc(50% - 400px/2);
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    margin: 0;
+    padding: 0 23px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+ul li a:hover {
+    color: gray;
+}
+
+.border {
+    border-right: 1px solid rgb(234, 234, 234);
+    box-shadow: 1px 0 0 rgb(195, 195, 195);
+}

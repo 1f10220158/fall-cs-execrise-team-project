@@ -6,19 +6,19 @@
     <meta charset="UTF-8">
     <title>BreakingCipher.jp/createAccount.html</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/user.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
 </head>
 
 <body>
-
-    <div id="header">
+    <div id="particles-js">
+    <div id="wrapper">
         <nav>
             <ul>
-                <li><a href="{% url 'index' %}" id="pageTitle">BreakingCipher.jp</a></li>
-                <li><a href="{% url 'sharePlatformSearch' %}">暗号投稿記事一覧へ</a></li>
-                <li><a href="{% url 'login' %}" id="user">ログイン</a></li>
+                <li><a href="{% url 'index' %}" class="border">Home</a></li>
+                <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
+                <li><a href="{% url 'login' %}" id="user">Login</a></li>
             </ul>
         </nav>
-    </div>
 
     <div id="main">
         <h1>アカウント作成</h1>
@@ -40,12 +40,16 @@
                     </label>
                 </div>
 
-                <button type="submit" id="buttonForCreate">Create</button>
+                <button type="submit" id="buttonForCreate">Go</button>
             </form>
         </div>
     </div>
+    </div>
+    </div>
 
-    <script src="{% static 'index.js' %}" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="{% static 'js/index.js' %}" defer></script>
     <script>
         /* headerパーツ*/
         if ("{{ userid | safe }}") {

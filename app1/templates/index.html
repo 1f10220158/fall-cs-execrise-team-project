@@ -6,41 +6,71 @@
     <meta charset="UTF-8">
     <title>BreakingCipher.jp</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
-    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
 </head>
 
 <body>
-    <div id="header">
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}" id="pageTitle">BreakingCipher.jp</a></li>
-                <li><a href="{% url 'sharePlatformSearch' %}">暗号投稿記事一覧へ</a></li>
-                <li><a href="{% url 'login' %}" id="user">ログイン</a></li>
-            </ul>
-        </nav>
+    <div id="particles-js">
+        <div id="wrapper">
+            <div id="header">
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'index' %}" class="border">Home</a></li>
+                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
+                        <li><a href="{% url 'login' %}" id="user">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div id="main">
+                <div class="articleBox">
+                    <h1>BreakingCipherとは</h1>
+
+                    <!-- このサイトの説明を追加予定-->
+                    <h3>このサイトでは、大きく3つのことができます</h3>
+                    <div class="orderList">
+                        <ol>
+                            <li>ユーザー自身が暗号を投稿できる！</li>
+                            <li>それらを他のユーザー達とコメントしながら解読できる!</li>
+                            <li>公式が出題する暗号を他のユーザーとタイムで競い合いながら解読できる!</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="articleBox">
+                    <h2 id="HowToPost">記事の投稿方法</h2>
+
+                    <!--記事の投稿の仕方-->
+                    <h3>記事を投稿するには、5つの手順を踏むだけ!</h3>
+
+                    <div class="orderList">
+                        <ol>
+                            <li>ホームページから記事一覧をクリック!</li>
+                            <li>ユーザーIDを公開して投稿するか、匿名IDとして投稿するかを選択</li>
+                            <li>タイトルと暗号の説明を入力</li>
+                            <li>暗号をPDF形式かファイル形式でアップロード</li>
+                            <li>「投稿する」をクリックすれば完了!</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="articleBox">
+
+                    <h2>このサイトについて</h2>
+
+                    <!--公式暗号についての説明-->
+                    <p>このサイト内にはいくつかの暗号が...<br>
+                        それらを見つけ、解読してみよう!<br>
+                        その解読時間で全国のユーザー達と競い合うことができます!<br>
+                        あなたはいくつ見つけられるかな？
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="main">
-        <div class="articleBox">
-            <h1>BreakingCipherとは</h1>
-
-            <!-- このサイトの説明を追加予定-->
-            <p class="article1">このサイトでは、大きく3つのことができます<br>1.ユーザー自身が暗号を投稿できる！<br>2.それらを他のユーザー達とコメントしながら解読できる!<br>3.公式が出題する暗号を他のユーザーとタイムで競い合いながら解読できる!</p>
-        </div>
-        <div class="articleBox">
-            <h2 id="HowToPost">記事の投稿の仕方</h2>
-
-            <!--記事の投稿の仕方-->
-            <p class="article2">記事を投稿するには、5つの手順を踏むだけ!<br>1.ホームページから記事一覧をクリック!<br>2.ユーザーIDを公開して投稿するか、匿名IDとして投稿するかを選択<br>3.タイトルと暗号の説明を入力<br>4.暗号をPDF形式かファイル形式でアップロード<br>5.「投稿する」をクリックすれば完了!<br>*詳細は記事一覧のページのヘルプへ</p>
-
-            <h2>このサイトの中には....</h2>
-
-            <!--公式暗号についての説明-->
-            <p class="article3">いくつかの公式暗号が隠されている、、、<br>それらを見つけ、解読してみよう!<br>その解読時間で全国のユーザー達と競い合うことができます!<br>あなたはいくつ見つけられるかな？</p>
-        </div>
-    </div>
-
-    <script src="{% static 'index.js' %}" defer></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="{% static 'js/index.js' %}" defer></script>
     <script>
         if ("{{ userid | safe }}") {
             const userID = "{{ userid | safe }}";

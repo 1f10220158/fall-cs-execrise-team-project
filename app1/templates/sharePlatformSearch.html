@@ -6,15 +6,18 @@
     <meta charset="UTF-8">
     <title>BreakingCipher.jp/sharePlatformSearch.html</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/sharePlatformSearch.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
 </head>
 
 <body>
+    <div id="particles-js">
+    <div id="wrapper">
     <div id="header">
         <nav>
             <ul>
-                <li><a href="{% url 'index' %}" id="pageTitle">BreakingCipher.jp</a></li>
-                <li><a href="{% url 'sharePlatformSearch' %}">暗号投稿記事一覧へ</a></li>
-                <li><a href="{% url 'login' %}" id="user">ログイン</a></li>
+                <li><a href="{% url 'index' %}" class="border">Home</a></li>
+                <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
+                <li><a href="{% url 'login' %}" id="user">Login</a></li>
             </ul>
         </nav>
     </div>
@@ -76,8 +79,11 @@
                 <button type="submit">送信</button>
         </form>
     </div>
+    </div>
+    </div>
 
-    <script src="{% static 'index.js' %}" defer></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="{% static 'js/index.js' %}" defer></script>
     <script>
         if ("{{ userid | safe }}") {
             const userID = "{{ userid | safe }}";
