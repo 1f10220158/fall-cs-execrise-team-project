@@ -1,1 +1,137 @@
 @charset "utf-8";
+
+#main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#rightBox {
+    z-index: 5;
+    height: 80%;
+    overflow: auto;
+    background-color: white;
+    margin-right: 30px;
+    padding: 30px;
+    width: 600px;
+    min-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgb(177, 177, 177);
+}
+
+#leftBox {
+    z-index: 5;
+    overflow: auto;
+    position: sticky;
+    height: 80%;
+    background-color: white;
+    margin:0 30px;
+    padding: 30px;
+    width: 40%;
+    min-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgb(177, 177, 177);
+}
+
+h1 {
+    margin: 0;
+    border-bottom: 1px solid black;
+    padding-left: 1rem;
+}
+
+.article a h2 {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.article {
+    border-top: 2px solid rgb(210, 208, 208);
+    padding: 0 15px;
+}
+
+.article a {
+    text-decoration: none;
+    color: black;
+}
+
+.article a p {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.leftBoxTop {
+    padding: 10px;
+}
+
+.leftBoxTop a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+#preview {
+    height: 1000px;
+}
+
+.inputBox {
+    width: 75%;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    padding-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.textUnderLine {
+    position: relative;
+    border-bottom: 1px solid #c2c2c2;
+    width: 80%;
+}
+
+.textUnderLine::before,
+.textUnderLine::after {
+    position: absolute; 
+    width: 0px; /*アニメーションで0pxから50%に*/
+    height: 1px; /*高さ*/
+    content: '';
+    background-color: #00066f; /*アニメーションの色*/
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+.textUnderLine::before {
+    left: 50%; /*中央配置*/
+}
+
+/*中央から左へのアニメーション*/
+.textUnderLine::after { 
+    right: 50%; /*中央配置*/
+}
+
+.inputBox:focus + .textUnderLine::before,
+.inputBox:focus + .textUnderLine::after {
+    width: 50%;
+}
+
+.inputBoxImg {
+    vertical-align: -4px;
+}
+
+#leftBoxBottom {
+    margin-top: 40px;
+}
+
+.user {
+    font-size: 18px;
+}
+
+.user span {
+    font-size: 16px;
+    padding: 20px;
+}
+
+#answerBox {
+    padding-top: 40px;
+}

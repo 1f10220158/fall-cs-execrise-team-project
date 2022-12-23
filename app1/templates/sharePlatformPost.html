@@ -11,62 +11,62 @@
 
 <body>
     <div id="particles-js">
-    <div id="wrapper">
-    <div id="header">
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}" class="border">Home</a></li>
-                <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
-                <li><a href="{% url 'login' %}" id="user">Login</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <div id="main">
-        <div class="articleBox">
-            <h1>記事一覧</h1>
-            <a href="{% url 'index' %}#HowToPost">このページのヘルプ</a>
-        </div>
-
-        <div class="articleBox">
-            <form id="articlePush">
-                <div id="leftBox">
-                    {% csrf_token %}
-                    <p>投稿するユーザーIDの選択</p>
+        <div id="wrapper">
+            <div id="header">
+                <nav>
                     <ul>
-                        <li>
-                            <label for="loginUserID"><input type="radio" name="userID" value="longinUserID"
-                                    id="loginUserID">ログイン中のユーザーID</label>
-                        </li>
-                        <li>
-                            <label for="anonymousID"><input type="radio" name="userID" value="anonymousID"
-                                    id="anonymousID" checked>匿名ID</label>
-                        </li>
+                        <li><a href="{% url 'index' %}" class="border">Home</a></li>
+                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
+                        <li><a href="{% url 'login' %}" id="user">Login</a></li>
                     </ul>
+                </nav>
+            </div>
 
-                    <label for="title">タイトル<br>
-                        <input type="text" id="title" name="title" placeholder="タイトル" required></label><br>
-
-                    <label for="content">内容<br>
-                        <textarea name="content" id="content" placeholder="暗号の説明" required></textarea></label>
-
+            <div id="main">
+                <div class="articleBox">
+                    <h1>記事一覧</h1>
+                    <a href="{% url 'index' %}#HowToPost">このページのヘルプ</a>
                 </div>
 
-                <div id="rightBox">
-                    <p>pdfアップロード</p>
-                        <div id="dropBox">
-                            <p>ファイルをドロップ</p>
-                            <div id="preview">
-                            </div>
+                <div class="articleBox">
+                    <form id="articlePush">
+                        <div id="leftBox">
+                            {% csrf_token %}
+                            <p>投稿するユーザーIDの選択</p>
+                            <ul>
+                                <li>
+                                    <label for="loginUserID"><input type="radio" name="userID" value="longinUserID"
+                                            id="loginUserID">ログイン中のユーザーID</label>
+                                </li>
+                                <li>
+                                    <label for="anonymousID"><input type="radio" name="userID" value="anonymousID"
+                                            id="anonymousID" checked>匿名ID</label>
+                                </li>
+                            </ul>
+
+                            <label for="title">タイトル<br>
+                                <input type="text" id="title" name="title" placeholder="タイトル" required></label><br>
+
+                            <label for="content">内容<br>
+                                <textarea name="content" id="content" placeholder="暗号の説明" required></textarea></label>
+
                         </div>
-                    <input type="file" id="articleData" name="articleData" required>
-                </div>
 
-                <button type="submit">投稿する</button>
-            </form>
+                        <div id="rightBox">
+                            <p>pdfアップロード</p>
+                            <div id="dropBox">
+                                <p>ファイルをドロップ</p>
+                                <div id="preview">
+                                </div>
+                            </div>
+                            <input type="file" id="articleData" name="articleData" required>
+                        </div>
+
+                        <button type="submit">投稿する</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
@@ -99,31 +99,32 @@
             event.preventDefault();
             if (event.dataTransfer.files.length > 0) {
                 inputFileElement.files = event.dataTransfer.files;
-		        inputFileElement.dispatchEvent(new Event('change'));
+                inputFileElement.dispatchEvent(new Event('change'));
             }
         });
 
         //実際にデプロイしないと動作がわからない場所
         inputFileElement.addEventListener('change', event => {
             const url = window.URL.createObjectURL(event.target.files[0]);
-            instantPreviewElement.innerHTML = 
-            '<iframe src="' + url + '#page=1&scrollbar=0" width="50%" height="50%"' +
-            ' scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>';
+            instantPreviewElement.innerHTML =
+                '<iframe src="' + url + '#page=1&scrollbar=0" width="50%" height="50%"' +
+                ' scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>';
         });
 
-       //submitした後の処理
+        //submitした後の処理
         const articlePushElement = document.getElementById("articlePush");
         articlePushElement.addEventListener("submit", (event) => {
             event.preventDefault();
             const userIDValue = articlePushElement.userID
+
             function postFormData() {
                 const form = new FormData(articlePushElement);
-                    fetch("{% url 'sharePlatformPost' %}", {
-                        method: "POST", 
-                        body: form
-                    })
+                fetch("{% url 'sharePlatformPost' %}", {
+                    method: "POST",
+                    body: form
+                })
 
-                    window.location.href = "{% url 'sharePlatformPostEnd' %}"
+                window.location.href = "{% url 'sharePlatformPostEnd' %}"
             }
 
             //ログイン中のIDを使う場合
@@ -133,7 +134,7 @@
                 if ("{{ userid | safe }}") {
                     postFormData()
                 }
-                
+
                 //ログインしていなかったら警告
                 else {
                     alert("ログインしてません");
@@ -143,7 +144,7 @@
             //匿名を使う場合
             else {
                 postFormData()
-            } 
+            }
         })
     </script>
 </body>

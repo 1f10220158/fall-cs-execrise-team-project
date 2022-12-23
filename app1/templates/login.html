@@ -11,47 +11,47 @@
 
 <body>
     <div id="particles-js">
-    <div id="wrapper">
-    <div id="header">
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}" class="border">Home</a></li>
-                <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
-                <li><a href="{% url 'login' %}" id="user">Login</a></li>
-            </ul>
-        </nav>
-    </div>
+        <div id="wrapper">
+            <div id="header">
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'index' %}" class="border">Home</a></li>
+                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
+                        <li><a href="{% url 'login' %}" id="user">Login</a></li>
+                    </ul>
+                </nav>
+            </div>
 
-    <div id="main">
-        <h1>ログイン</h1>
-        <div id="inputBox">
-            <form action="" method="POST">
-                {% csrf_token %}
+            <div id="main">
+                <h1>ログイン</h1>
+                <div id="inputBox">
+                    <form action="" method="POST">
+                        {% csrf_token %}
 
-                <!--ユーザーネーム入力欄-->
-                <div class="inBox">
-                    <label for="userid">ユーザーID<br>
-                        <input id="userid" name="userid" type="text" placeholder="User ID" required>
-                    </label>
+                        <!--ユーザーネーム入力欄-->
+                        <div class="inBox">
+                            <label for="userid">ユーザーID<br>
+                                <input id="userid" name="userid" type="text" placeholder="User ID" required>
+                            </label>
+                        </div>
+
+                        <!--パスワード入力欄-->
+                        <div class="inBox">
+                            <label for="password">パスワード<br>
+                                <input id="password" name="password" type="password" placeholder="Password" required>
+                            </label>
+                        </div>
+
+                        <button type="submit">Go</button>
+                    </form>
+                    <div id="underInBox">
+                        <a href="{% url 'createAccount' %}" id="movePage">アカウント新規作成はこちら</a>
+                    </div>
                 </div>
-
-                <!--パスワード入力欄-->
-                <div class="inBox">
-                    <label for="password">パスワード<br>
-                        <input id="password" name="password" type="password" placeholder="Password" required>
-                    </label>
-                </div>
-
-                <button type="submit">Go</button>
-            </form>
-            <div id="underInBox">
-            <a href="{% url 'createAccount' %}" id="movePage">アカウント新規作成はこちら</a>
-        </div>
+            </div>
         </div>
     </div>
-    </div>
-    </div>
-    
+
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script src="{% static 'js/index.js' %}" defer></script>
     <script>

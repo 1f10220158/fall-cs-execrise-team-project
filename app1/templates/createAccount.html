@@ -11,40 +11,40 @@
 
 <body>
     <div id="particles-js">
-    <div id="wrapper">
-        <nav>
-            <ul>
-                <li><a href="{% url 'index' %}" class="border">Home</a></li>
-                <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
-                <li><a href="{% url 'login' %}" id="user">Login</a></li>
-            </ul>
-        </nav>
+        <div id="wrapper">
+            <nav>
+                <ul>
+                    <li><a href="{% url 'index' %}" class="border">Home</a></li>
+                    <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
+                    <li><a href="{% url 'login' %}" id="user">Login</a></li>
+                </ul>
+            </nav>
 
-    <div id="main">
-        <h1>アカウント作成</h1>
-        <div id="inputBox">
-            <form id="pushUserData" action="{% url 'createAccount' %}" method="POST">
-                {% csrf_token %}
+            <div id="main">
+                <h1>アカウント作成</h1>
+                <div id="inputBox">
+                    <form id="pushUserData" action="{% url 'createAccount' %}" method="POST">
+                        {% csrf_token %}
 
-                <!--ユーザーネーム入力欄-->
-                <div class="inBox">
-                    <label for="userid">ユーザーID<br>
-                        <input id="userid" name="userid" type="text" placeholder="User ID" required>
-                    </label>
+                        <!--ユーザーネーム入力欄-->
+                        <div class="inBox">
+                            <label for="userid">ユーザーID<br>
+                                <input id="userid" name="userid" type="text" placeholder="User ID" required>
+                            </label>
+                        </div>
+
+                        <!--パスワード入力欄-->
+                        <div class="inBox">
+                            <label for="pssword">パスワード<br>
+                                <input id="password" name="password" type="text" placeholder="Password" required>
+                            </label>
+                        </div>
+
+                        <button type="submit" id="buttonForCreate">Go</button>
+                    </form>
                 </div>
-
-                <!--パスワード入力欄-->
-                <div class="inBox">
-                    <label for="pssword">パスワード<br>
-                        <input id="password" name="password" type="text" placeholder="Password" required>
-                    </label>
-                </div>
-
-                <button type="submit" id="buttonForCreate">Go</button>
-            </form>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
 
 
@@ -61,14 +61,14 @@
 
         /* cookie関連 */
         const pushUserData = document.getElementById('pushUserData');
-        
+
         pushUserData.addEventListener("submit", () => {
-                    const userid = document.getElementById('userid').value;
-                    const password = document.getElementById('password').value;
-                    const userData = {
-                        "userid": userid,
-                        "password": password,
-                    };
+            const userid = document.getElementById('userid').value;
+            const password = document.getElementById('password').value;
+            const userData = {
+                "userid": userid,
+                "password": password,
+            };
 
             /* cookie保存の詳細:
             
