@@ -165,18 +165,3 @@ h1 {
 #answerBox {
     padding-top: 40px;
 }
-
-::-webkit-scrollbar{
-    width: 10px;
- }
-
-::-webkit-scrollbar-track{
-    background-color: rgb(255, 255, 255);
-    margin: 10px 0;
-    border-radius: 5px;
- }
-
-::-webkit-scrollbar-thumb{
-    background-color:#337781;
-    border-radius: 5px;
- }

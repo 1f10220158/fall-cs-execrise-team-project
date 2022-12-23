@@ -23,16 +23,18 @@
             </div>
 
             <div id="main">
-                <div class="articleBox">
-                    <h1>記事一覧</h1>
-                    <a href="{% url 'index' %}#HowToPost">このページのヘルプ</a>
+                <h1>記事の投稿</h1>
+                <div id="help">
+                    <a href="{% url 'index' %}#HowToPost">※このページのヘルプ</a>
                 </div>
 
-                <div class="articleBox">
+                <div id="formBox">
                     <form id="articlePush">
+                    <div id="formInBox">
+
                         <div id="leftBox">
                             {% csrf_token %}
-                            <p>投稿するユーザーIDの選択</p>
+                            <h2>投稿するユーザーIDの選択</h2>
                             <ul>
                                 <li>
                                     <label for="loginUserID"><input type="radio" name="userID" value="longinUserID"
@@ -43,26 +45,31 @@
                                             id="anonymousID" checked>匿名ID</label>
                                 </li>
                             </ul>
-
-                            <label for="title">タイトル<br>
-                                <input type="text" id="title" name="title" placeholder="タイトル" required></label><br>
-
-                            <label for="content">内容<br>
-                                <textarea name="content" id="content" placeholder="暗号の説明" required></textarea></label>
-
-                        </div>
-
+                            <label for="title" class="label">タイトル</label>
+                            <div class="inputBox">
+                                <input type="text" id="title" name="title" placeholder="タイトルを入力" required><br>
+                            </div>
+                            <label for="content" class="label">内容</label>
+                            <div class="inputBox">
+                                <textarea name="content" id="content" placeholder="説明を入力" required></textarea>
+                            </div>
+                            </div>
+                    
                         <div id="rightBox">
-                            <p>pdfアップロード</p>
-                            <div id="dropBox">
-                                <p>ファイルをドロップ</p>
-                                <div id="preview">
+                            <label for="articleData" class="label">pdfアップロード</label>
+                            <div id="preview">
+                                <div id="dropBox">
+                                    <div id="dropBoxWrap">
+                                    <p>ファイルをドロップ</p>
+                                    </div>
                                 </div>
                             </div>
                             <input type="file" id="articleData" name="articleData" required>
                         </div>
-
-                        <button type="submit">投稿する</button>
+                    </div>
+                        <div id="button">
+                            <button type="submit">投稿する</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -107,7 +114,7 @@
         inputFileElement.addEventListener('change', event => {
             const url = window.URL.createObjectURL(event.target.files[0]);
             instantPreviewElement.innerHTML =
-                '<iframe src="' + url + '#page=1&scrollbar=0" width="50%" height="50%"' +
+                '<iframe src="' + url + '#page=1&scrollbar=0" width="100%" height="100%"' +
                 ' scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>';
         });
 

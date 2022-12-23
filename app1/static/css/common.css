@@ -59,3 +59,17 @@ ul li a:hover {
     border-right: 1px solid rgb(234, 234, 234);
     box-shadow: 1px 0 0 rgb(195, 195, 195);
 }
+
+::-webkit-scrollbar{
+    width: 10px;
+ }
+
+::-webkit-scrollbar-track{
+    background-color: rgba(255, 255, 255, 0);
+    margin: 5px 0;
+ }
+
+::-webkit-scrollbar-thumb{
+    background-color:#ffffff;
+    border-radius: 5px;
+ }
