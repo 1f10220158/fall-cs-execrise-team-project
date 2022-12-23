@@ -9,4 +9,5 @@ urlpatterns = [
     path("sharePlatformSearch", views.share_platform_search, name="sharePlatformSearch"),
     path("createAccountEnd", views.create_account_end, name="createAccountEnd"),
     path("sharePlatformPostEnd", views.share_platform_post_end, name="sharePlatformPostEnd"),
+    path("article_search", views.Article_search, name="article_search"),
 ]

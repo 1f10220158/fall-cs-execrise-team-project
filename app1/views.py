@@ -98,3 +98,39 @@ def create_account_end(request):
 
         return render(request, "createAccountEnd.html", request.COOKIES)
 
+def Article_search(request):
+    #記事検索用関数
+    #try,exceptは空欄で検索するときのエラー回避のため
+    try:
+        #URLのパラメータから検索ワードを取得
+        searchword = request.GET["searchbox"]
+
+        if "userid" in request.COOKIES:
+            #context内の記事をfilterで絞る
+            context = {
+                "articles": list(Article.objects.filter(title__contains=searchword).values()),
+                "userid" : request.COOKIES["userid"],
+                "password" : request.COOKIES["password"],
+            }
+
+            return render(request, "sharePlatformSearch.html", context)
+
+        context = {
+            "articles": list(Article.objects.filter(title__contains=searchword).values()),
+        }
+        return render(request, "sharePlatformSearch.html", context)
+
+    except:
+        if "userid" in request.COOKIES:
+            context = {
+                "articles": list(Article.objects.all().values()),
+                "userid" : request.COOKIES["userid"],
+                "password" : request.COOKIES["password"],
+            }
+
+            return render(request, "sharePlatformSearch.html", context)
+
+        context = {
+            "articles": list(Article.objects.all().values()),
+        }
+        return render(request, "sharePlatformSearch.html", context)

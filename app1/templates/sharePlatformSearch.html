@@ -36,7 +36,7 @@
 
                 <!--検索ボックス-->
                 <input type="text" id="searchbox" name="searchbox">
-                <button type="submit"><img src="虫眼鏡の画像" alt=""></button>
+                <button type="submit" onclick="Article_search()"><img src="虫眼鏡の画像" alt=""></button>
             </form>
         </div>
 
@@ -101,6 +101,18 @@
             previewElement.innerHTML = iframe;
         }
     </script>
+
+    <script type="text/javascript">
+        //記事を検索する機能（ページ遷移）
+        function Article_search(){
+            var searchbox = document.getElementById("searchbox");
+            location.href= "/article_search?searchbox="+searchbox;
+            //いつもここでページ遷移せず
+        }
+
+    </script>
+
+
 </body>
 
 </html>
