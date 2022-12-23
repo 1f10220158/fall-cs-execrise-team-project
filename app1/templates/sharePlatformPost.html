@@ -30,43 +30,42 @@
 
                 <div id="formBox">
                     <form id="articlePush">
-                    <div id="formInBox">
-
-                        <div id="leftBox">
-                            {% csrf_token %}
-                            <h2>投稿するユーザーIDの選択</h2>
-                            <ul>
-                                <li>
-                                    <label for="loginUserID"><input type="radio" name="userID" value="longinUserID"
-                                            id="loginUserID">ログイン中のユーザーID</label>
-                                </li>
-                                <li>
-                                    <label for="anonymousID"><input type="radio" name="userID" value="anonymousID"
-                                            id="anonymousID" checked>匿名ID</label>
-                                </li>
-                            </ul>
-                            <label for="title" class="label">タイトル</label>
-                            <div class="inputBox">
-                                <input type="text" id="title" name="title" placeholder="タイトルを入力" required><br>
-                            </div>
-                            <label for="content" class="label">内容</label>
-                            <div class="inputBox">
-                                <textarea name="content" id="content" placeholder="説明を入力" required></textarea>
-                            </div>
-                            </div>
-                    
-                        <div id="rightBox">
-                            <label for="articleData" class="label">pdfアップロード</label>
-                            <div id="preview">
-                                <div id="dropBox">
-                                    <div id="dropBoxWrap">
-                                    <p>ファイルをドロップ</p>
-                                    </div>
+                        <div id="formInBox">
+                            <div id="leftBox">
+                                {% csrf_token %}
+                                <h2>投稿するユーザーIDの選択</h2>
+                                <ul>
+                                    <li>
+                                        <label for="loginUserID"><input type="radio" name="userID" value="longinUserID"
+                                                id="loginUserID">ログイン中のユーザーID</label>
+                                    </li>
+                                    <li>
+                                        <label for="anonymousID"><input type="radio" name="userID" value="anonymousID"
+                                                id="anonymousID" checked>匿名ID</label>
+                                    </li>
+                                </ul>
+                                <label for="title" class="label">タイトル</label>
+                                <div class="inputBox">
+                                    <input type="text" id="title" name="title" placeholder="タイトルを入力" required><br>
+                                </div>
+                                <label for="content" class="label">内容</label>
+                                <div class="inputBox">
+                                    <textarea name="content" id="content" placeholder="説明を入力" required></textarea>
                                 </div>
                             </div>
-                            <input type="file" id="articleData" name="articleData" required>
+
+                            <div id="rightBox">
+                                <label for="articleData" class="label">pdfアップロード</label>
+                                <div id="preview">
+                                    <div id="dropBox">
+                                        <div id="dropBoxWrap">
+                                            <p>ファイルをドロップ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="file" id="articleData" name="articleData" required>
+                            </div>
                         </div>
-                    </div>
                         <div id="button">
                             <button type="submit">投稿する</button>
                         </div>
