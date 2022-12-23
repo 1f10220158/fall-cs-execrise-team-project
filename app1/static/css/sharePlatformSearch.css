@@ -7,32 +7,34 @@
 }
 
 #rightBox {
+    box-sizing: border-box;
     z-index: 5;
-    height: 80%;
+    height: 85vh;
     overflow: auto;
     background-color: white;
-    margin-right: 30px;
+    margin: 0 30px;
     padding: 30px;
-    width: 600px;
-    min-width: 600px;
+    width: 45%;
+    min-width: 400px;
+    max-width: 700px;
     border-radius: 10px;
     box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
-    border: 1px solid rgb(177, 177, 177);
+    border: 1.5px solid rgb(177, 177, 177);
 }
 
 #leftBox {
+    margin-left: 30px; 
+    box-sizing: border-box;
     z-index: 5;
     overflow: auto;
-    position: sticky;
-    height: 80%;
+    height: 85vh;
     background-color: white;
-    margin:0 30px;
-    padding: 30px;
+    padding-bottom: 30px; 
     width: 40%;
     min-width: 400px;
     border-radius: 10px;
     box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
-    border: 1px solid rgb(177, 177, 177);
+    border: 1.5px solid rgb(177, 177, 177);
 }
 
 h1 {
@@ -48,7 +50,7 @@ h1 {
 
 .article {
     border-top: 2px solid rgb(210, 208, 208);
-    padding: 0 15px;
+    padding: 0 45px;
 }
 
 .article a {
@@ -61,8 +63,18 @@ h1 {
     padding: 10px 0;
 }
 
+.article:active {
+    background-color:rgb(193, 193, 193);
+}
+
 .leftBoxTop {
-    padding: 10px;
+    border-bottom: 1px solid rgb(135, 135, 135);
+    padding: 30px 35px 20px 30px;
+    background-color: white;
+    position: sticky;
+    left: 0;
+    top: 0;
+    box-shadow: 0 10px 10px -12px rgb(72, 72, 72);
 }
 
 .leftBoxTop a {
@@ -72,7 +84,25 @@ h1 {
 }
 
 #preview {
-    height: 1000px;
+    height: 700px;
+    position: relative;
+}
+
+#preview div p {
+    text-align: center;
+    font-size: 70px;
+    font-weight: bold;
+    color: gray;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#preview div {
+    width: 100%;
+    height: 100%;
+    border: 5px solid gray;
 }
 
 .inputBox {
@@ -96,7 +126,7 @@ h1 {
     width: 0px; /*アニメーションで0pxから50%に*/
     height: 1px; /*高さ*/
     content: '';
-    background-color: #00066f; /*アニメーションの色*/
+    background-color: #72eded; /*アニメーションの色*/
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
 }
@@ -135,3 +165,18 @@ h1 {
 #answerBox {
     padding-top: 40px;
 }
+
+::-webkit-scrollbar{
+    width: 10px;
+ }
+
+::-webkit-scrollbar-track{
+    background-color: rgb(255, 255, 255);
+    margin: 10px 0;
+    border-radius: 5px;
+ }
+
+::-webkit-scrollbar-thumb{
+    background-color:#337781;
+    border-radius: 5px;
+ }
