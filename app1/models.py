@@ -7,29 +7,44 @@ class User(models.Model):
         primary_key = True,
         default = '匿名ID',
     )
-    password = models.CharField(max_length=200, default='')
-    time = models.DateTimeField(default=timezone.now)
+    password = models.CharField(
+        max_length = 200,
+    )
     
     def __str__(self):
         return self.user_id
 
 class Article(models.Model):
-    article_id = models.CharField(
+    article_id = models.AutoField(
         primary_key = True,
-        editable = False,
-        max_length = 40,
-        default = ""
     )
     user_id = models.ForeignKey(
         User,
         on_delete = models.CASCADE,
-        null = True,
-        blank = True,
+        default = "default_user_id",
     )
-    article_data = models.FileField(upload_to='', null=True)
-    time = models.DateTimeField(default=timezone.now)
-    title = models.CharField(max_length=200, default='default')
-    content = models.TextField(null=True, unique=False)
+    article_data = models.FileField(
+        upload_to = '',
+        default = "default_file_path"
+    )
+    post_time = models.DateTimeField(
+        default = timezone.now,
+    )
+    title = models.CharField(
+        max_length = 200,
+    )
+    content = models.TextField(
+        blank = True,
+        null = True,
+    )
+    answer = models.TextField(
+        default = "default_answer",
+    )
+
+    #ログイン中のIDを使う投稿は"1",匿名は"0"
+    login_or_anonymous = models.IntegerField(
+        default = 0,
+    )
 
     def __str__(self):
         return self.article_id
@@ -41,7 +56,9 @@ class TimeforOfficial(models.Model):
         primary_key = True,
         default ='default',
     )
-    time = models.DateTimeField(default=timezone.now)
+    clear_time = models.DateTimeField(
+        default = timezone.now,
+    )
 
     def __str__(self):
         return self.user_id
