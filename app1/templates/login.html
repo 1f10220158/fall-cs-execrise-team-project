@@ -26,25 +26,32 @@
             <div id="main">
                 <h1>ログイン</h1>
                 <div id="inputBox">
-                    <form action="" method="POST">
+                    <form id="loginForm">
                         {% csrf_token %}
 
                         <!--ユーザーネーム入力欄-->
                         <div class="inBox">
-                            <label for="userid">ユーザーID<br>
-                                <input id="userid" name="userid" type="text" placeholder="User ID" required>
+                            <label for="userid">ユーザID<br>
+                                <input id="userid" name="userid" type="text" placeholder="User ID">
                             </label>
                         </div>
 
                         <!--パスワード入力欄-->
                         <div class="inBox">
-                            <label for="password">パスワード<br>
-                                <input id="password" name="password" type="password" placeholder="Password" required>
+                            <label for="password">パスワード
+                                <br>
+                                <div id="passwordInputBox">
+                                <input id="password" name="password" type="password" placeholder="Password">
+                                <button type="button" id="unclose"><img src="{% static 'images/unclose.png' %}" alt="unclose" width="30px"></button>
+                            </div>
+                                
+                            
                             </label>
                         </div>
 
                         <button type="submit">Go</button>
                     </form>
+                    <div id="errorBox"></div>
                     <div id="underInBox">
                         <a href="{% url 'createAccount' %}" id="movePage">アカウント新規作成はこちら</a>
                     </div>
@@ -62,7 +69,62 @@
             userElement.textContent = userID;
             userElement.removeAttribute("href");
         }
+
+        const loginFormElement = document.getElementById("loginForm");
+
+        loginFormElement.addEventListener("submit", (event) => {
+            const form = new FormData(loginFormElement);
+            const userid = document.getElementById("userid").value;
+            const password = document.getElementById("password").value;
+
+            event.preventDefault();
+
+            fetch("{% url 'login' %}", {
+                method: "POST",
+                body: form,
+            })
+            .then(response => {
+                return response.text()
+            })
+            .then(text => {
+                if (text == "True") {
+                    const path = '/';
+                    const maxAge = '60*60*24*30';
+                    const samesite = 'lax';
+
+                    /*userIDをcookieに保存*/
+                    document.cookie = "userid=" + userid +
+                        "; path=" + path +
+                        "; max-age=" + maxAge +
+                        "; samesite=" + samesite;
+
+                    /*passwordをcookieに保存*/
+                    document.cookie = "password=" + password +
+                        "; path=" + path +
+                        "; max-age=" + maxAge +
+                        "; samesite=" + samesite;
+
+                    window.location.href = "{% url 'index' %}";
+                } else {
+                    const errorElement = document.getElementById("errorBox");
+                    errorElement.innerHTML = "<p id='error'>ユーザIDかパスワードが不正です</p>";
+                }
+            })
+        })
+
+        //パスワード欄を一瞬だけ見えるようにする機能
+        const uncloseElement = document.getElementById("unclose");
+        const passwordElement = document.getElementById("password");
+
+        uncloseElement.addEventListener("mousedown", (event) => {
+            event.preventDefault();
+            passwordElement.type = "text";
+        })
+
+        uncloseElement.addEventListener("mouseup", (event) => {
+            event.preventDefault();
+            passwordElement.type = "password";
+        })
     </script>
 </body>
-
 </html>

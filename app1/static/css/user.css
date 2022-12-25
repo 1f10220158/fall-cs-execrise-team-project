@@ -37,3 +37,27 @@
 #movePage:hover {
     color: gray;
 }
+
+#error {
+    font-size: 16px;
+    color: rgb(159, 0, 0);
+}
+
+#unclose {
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0);
+    vertical-align: -10px;
+    padding: 0 4px;
+    margin: 0 0 0 3px;
+    border-radius: 10px;
+}
+
+#unclose:active {
+    background-color:rgba(193, 193, 193, 0.517);
+}
+
+#passwordInputBox {
+    width: 227px;
+    margin-left: calc(50% - 90px);
+}

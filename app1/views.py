@@ -31,11 +31,17 @@ def create_account(request):
         return render(request, "createAccountEnd.html", request.COOKIES)
 
 def login(request):
-    
-    if "userid" in request.COOKIES:
-        return render(request, "login.html", request.COOKIES)
-    
-    return render(request, "login.html")
+    if request.method == "POST":
+        user_id = request.POST.get("userid")
+        password = request.POST.get("password")
+
+        if User.objects.filter(user_id=user_id, password=password):
+            return HttpResponse("True")
+        
+        return HttpResponse("False")
+
+    else:
+        return render(request, "login.html")
 
 def share_platform_post(request):
     #GETの場合
