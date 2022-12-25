@@ -16,7 +16,8 @@
                 <nav>
                     <ul>
                         <li><a href="{% url 'index' %}" class="border">Home</a></li>
-                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
+                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article Search</a></li>
+                        <li><a href="{% url 'sharePlatformPost' %}" class="border">Article Post</a></li>
                         <li><a href="{% url 'login' %}" id="user">Login</a></li>
                     </ul>
                 </nav>
@@ -46,7 +47,7 @@
                                 </ul>
                                 <label for="title" class="label">タイトル</label>
                                 <div class="inputBox">
-                                    <input type="text" id="title" name="title" placeholder="タイトルを入力" required><br>
+                                    <input type="text" id="title" class="textBox" name="title" placeholder="タイトルを入力" required><br>
                                 </div>
                                 <label for="content" class="label">内容</label>
                                 <div class="inputBox">
@@ -63,7 +64,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="inputBox">
                                 <input type="file" id="articleData" name="articleData" required>
+                                </div>
+                                <label for="answer" class="label">正解</label>
+                                <div class="inputBox">
+                                <input type="text" id="answer" class="textBox" name="answer" placeholder="正解を入力" required>
+                                </div>
                             </div>
                         </div>
                         <div id="button">
@@ -109,7 +116,7 @@
             }
         });
 
-        //実際にデプロイしないと動作がわからない場所
+        //記事のプレビュー機能
         inputFileElement.addEventListener('change', event => {
             const url = window.URL.createObjectURL(event.target.files[0]);
             instantPreviewElement.innerHTML =

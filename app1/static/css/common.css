@@ -32,7 +32,9 @@ canvas {
     background-color: white;
     z-index: 2;
     padding: 12px 0px;
-    width: 400px;
+    width: 60%;
+    max-width: 650px;
+    min-width: 460px;
     margin: 20px auto;
     border-radius: 10px;
     justify-content: center;

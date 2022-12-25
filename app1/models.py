@@ -21,11 +21,11 @@ class Article(models.Model):
     user_id = models.ForeignKey(
         User,
         on_delete = models.CASCADE,
-        default = "default_user_id",
+        null = True,
     )
     article_data = models.FileField(
         upload_to = '',
-        default = "default_file_path"
+        default = "default_file_path",
     )
     post_time = models.DateTimeField(
         default = timezone.now,
@@ -46,15 +46,18 @@ class Article(models.Model):
         default = 0,
     )
 
-    def __str__(self):
+    def __int__(self):
         return self.article_id
+
+    def __str__(self):
+        return self.answer
 
 class TimeforOfficial(models.Model):
     user_id = models.OneToOneField(
         User,
         on_delete = models.CASCADE,
         primary_key = True,
-        default ='default',
+        default ='default_user_id',
     )
     clear_time = models.DateTimeField(
         default = timezone.now,
@@ -63,3 +66,17 @@ class TimeforOfficial(models.Model):
     def __str__(self):
         return self.user_id
 
+class UserAnsweredArticle(models.Model):
+    answer_user_id = models.ForeignKey(
+        User,
+        on_delete = models.CASCADE,
+        default = "default_answer_user_id",
+    )
+    article_id = models.ForeignKey(
+        Article,
+        on_delete = models.CASCADE,
+        default = "default_article_id",
+    )
+    id = models.AutoField(
+        primary_key = True,
+    )

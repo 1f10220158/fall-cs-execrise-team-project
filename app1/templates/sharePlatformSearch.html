@@ -16,7 +16,8 @@
                 <nav>
                     <ul>
                         <li><a href="{% url 'index' %}" class="border">Home</a></li>
-                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article</a></li>
+                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article Search</a></li>
+                        <li><a href="{% url 'sharePlatformPost' %}" class="border">Article Post</a></li>
                         <li><a href="{% url 'login' %}" id="user">Login</a></li>
                     </ul>
                 </nav>
@@ -26,15 +27,17 @@
                 <div id="leftBox">   
                     <div class="leftBoxTop">
                     <h1>記事一覧</h1>
+                    <div id="pageMove">
                         <a href="{% url 'sharePlatformPost' %}">※記事を投稿する場合はこちら</a>
+                    </div>
 
                         <!--検索ボックス-->
-                        <form action="" method="GET">
+                        <form method="GET" action="{% url 'articlesSearch' %}">
                             {% csrf_token %}
                             <div id="leftBoxBottom">
-                                <label for="searchBox"><img class="inputBoxImg" src="{% static 'images/search_image.png' %}" alt="虫眼鏡の画像"
+                                <label for="search"><img class="inputBoxImg" src="{% static 'images/search_image.png' %}" alt="虫眼鏡の画像"
                                     width="22px"></label>
-                                <input type="text" id="searchBox" class="inputBox" name="searchbox" placeholder="記事を検索する">
+                                <input type="text" id="search" class="inputBox" name="search" placeholder="記事を検索する" required>
                                 <div class="textUnderLine"></div>
                             </div>
                         </form>
@@ -47,26 +50,34 @@
 
                         {% for article in articles %}
                         <div class="article">
-                            <a href="#preview" onclick="preview('{{ article.article_data.url }}')">
-                                <h2>{{ article.title }}</h2>
+                            <a href="#preview" onclick="articleClick('media/{{ article.article_data }}', '{{ article.article_id }}')">
+                                <div class="articleHeader">
+                                <h2>{{ article.title }}
+                                {% for answered_article in answered %}
+                                {% if answered_article.article_id_id == article.article_id %}
+                                <span>(回答済み)</span>
+                                {% endif %}
+                                {% endfor %}
+                                </h2>
+                                </div>
 
                                 {% if article.user_id %}
                                 <p class="user">{{ article.user_id }}
-                                    <span>{{ article.time }}</span>
+                                    <span>{{ article.post_time }}</span>
                                 </p>
                                 {% else %}
                                 <p class="user">匿名ID
-                                    <span>{{ article.time }}</span>
+                                    <span>{{ article.post_time }}</span>
                                 </p>
                                 {% endif %}
 
-                                <p>{{ article.content }}</p>
+                                <p class="content">{{ article.content }}</p>
                             </a>
                         </div>
                         {% endfor %}
 
                         {% else %}
-                        <div class="article">
+                        <div class="noArticle">
                             <p>記事が見つかりませんでした。</p>
                         </div>
                         {% endif %}
@@ -82,14 +93,17 @@
                         </div>
                     </div>
 
-                    <form method="POST" action="">
+                    <form id="formAnswer">
                         {% csrf_token %}
+                        <input type="hidden" name="articleId" id="articleId" value="">
                         <div id="answerBox">
                         <label for="answer">
                             <img src="{% static 'images/answer_image.png' %}" class="inputBoxImg" alt="A.の画像" width="22px">
                         </label>
                             <input type="text" id="answer" class="inputBox" name="answer" placeholder="答えを入力する" required>
                             <div class="textUnderLine"></div>
+                            <div id="result">
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -106,27 +120,44 @@
             userElement.textContent = userID;
             userElement.removeAttribute("href");
         }
-
-        //記事を表示する機能
+     
         const previewElement = document.getElementById("preview");
 
-        function preview(articleData) {
-            console.log(articleData);
+        function articleClick(articleData, articleId) {
+
+            //記事を表示する機能
             const iframe = '<iframe src="' + articleData + '#page=1&scrollbar=0" width="100%" height="100%"' +
                 ' scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>';
             previewElement.innerHTML = iframe;
-        }
 
-        //記事を検索する機能（ページ遷移）
-        function Article_search(){
-            var searchbox = document.getElementById("searchbox");
-            location.href= "/article_search?searchbox="+searchbox;
-            //いつもここでページ遷移せず
-        }
+            //articleIdをinputに埋め込む
+            const articleIdElement = document.getElementById("articleId");
+            articleIdElement.value = articleId;
+            const formAnswerElement = document.getElementById("formAnswer");
 
+            //別の記事がクリックされた場合、回答欄と結果をリセット
+            const AnswerElement = document.getElementById("answer");
+            AnswerElement.value = "";
+            const resultElement = document.getElementById("result");
+            resultElement.innerHTML = "";
+
+            //articleId, answerをサーバー側に送信
+            formAnswerElement.addEventListener("submit", (event) => {
+                const form = new FormData(formAnswerElement);
+                event.preventDefault();
+                fetch("{% url 'getAnswer' %}", {
+                    method: "POST",
+                    body: form,
+                })
+                .then(response => {
+                    return response.text();
+                })
+                .then(text => {
+                    resultElement.innerHTML = "<p>" + text +"</p>";
+                });
+            });   
+        };    
     </script>
-
-
 </body>
 
 </html>

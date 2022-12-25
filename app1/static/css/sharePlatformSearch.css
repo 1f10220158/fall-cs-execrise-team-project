@@ -49,8 +49,14 @@ h1 {
 }
 
 .article {
-    border-top: 2px solid rgb(210, 208, 208);
-    padding: 0 45px;
+    border-bottom: 2px solid rgb(210, 208, 208);
+    padding: 0 40px;
+}
+
+.noArticle p {
+    text-align: center;
+    margin: 50px auto;
+    font-size: 18px;
 }
 
 .article a {
@@ -60,7 +66,20 @@ h1 {
 
 .article a p {
     margin: 0;
+}
+
+.user {
+    font-size: 18px;
+}
+
+.content {
     padding: 10px 0;
+    font-size: 18px;
+}
+
+.user span {
+    font-size: 16px;
+    padding: 0 20px;
 }
 
 .article:active {
@@ -84,7 +103,7 @@ h1 {
 }
 
 #preview {
-    height: 700px;
+    height: 650px;
     position: relative;
 }
 
@@ -150,18 +169,18 @@ h1 {
 }
 
 #leftBoxBottom {
-    margin-top: 40px;
-}
-
-.user {
-    font-size: 18px;
-}
-
-.user span {
-    font-size: 16px;
-    padding: 20px;
+    margin-top: 25px;
 }
 
 #answerBox {
     padding-top: 40px;
+}
+
+#pageMove {
+    padding-top: 10px;
+}
+
+.articleHeader span {
+    font-weight: normal;
+    font-size: 17px;
 }
