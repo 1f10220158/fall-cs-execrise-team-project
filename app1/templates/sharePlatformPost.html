@@ -11,13 +11,14 @@
 
 <body>
     <div id="particles-js">
+        <div id="mist">
         <div id="wrapper">
             <div id="header">
                 <nav>
                     <ul>
-                        <li><a href="{% url 'index' %}" class="border">Home</a></li>
-                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article Search</a></li>
-                        <li><a href="{% url 'sharePlatformPost' %}" class="border">Article Post</a></li>
+                        <li class="border"><a href="{% url 'index' %}">Home</a></li>
+                        <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
+                        <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
                         <li><a href="{% url 'login' %}" id="user">Login</a></li>
                     </ul>
                 </nav>
@@ -81,6 +82,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script src="{% static 'js/index.js' %}" defer></script>

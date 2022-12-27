@@ -11,21 +11,24 @@
 
 <body>
     <div id="particles-js">
+        <div id="mist">
         <div id="wrapper">
             <div id="header">
                 <nav>
                     <ul>
-                        <li><a href="{% url 'index' %}" class="border">Home</a></li>
-                        <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article Search</a></li>
-                        <li><a href="{% url 'sharePlatformPost' %}" class="border">Article Post</a></li>
+                        <li class="border"><a href="{% url 'index' %}">Home</a></li>
+                        <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
+                        <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
                         <li><a href="{% url 'login' %}" id="user">Login</a></li>
                     </ul>
                 </nav>
             </div>
+        
 
             <div id="main">
+                <div id="rightBox">
                 <div class="articleBox">
-                    <h1>BreakingCipherとは</h1>
+                    <h1 id="explain">BreakingCipherとは</h1>
 
                     <!-- このサイトの説明を追加予定-->
                     <h3>このサイトでは、大きく3つのことができます</h3>
@@ -67,8 +70,29 @@
                     </p>
                 </div>
             </div>
+            </div>
+
+            <div id="leftBox">
+                <h1 id="xxtitle">xxxxxxxxxxxxxx</h1>
+                <div>
+                    <div class="xxbox">
+                    <p>32</p>
+                    <p>cipher</p>
+                    </div>
+                    <div class="xxbox">
+                    <p>1383</p>
+                    <p>3061</p>
+                    <p>3867</p>
+                    <p>2842</p>
+                    <p>1939</p>
+                    <p>2726</p>
+                    <p>1836</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script src="{% static 'js/index.js' %}" defer></script>

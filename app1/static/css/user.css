@@ -23,6 +23,7 @@
 
 .inBox {
     padding: 10px 0;
+    position: relative;
 }
 
 #underInBox {
@@ -44,12 +45,14 @@
 }
 
 #unclose {
+    position: absolute;
+    top: 45%;
+    left: 71%;
     border: none;
     outline: none;
     background-color: rgba(255, 255, 255, 0);
     vertical-align: -10px;
     padding: 0 4px;
-    margin: 0 0 0 3px;
     border-radius: 10px;
 }
 
@@ -57,7 +60,42 @@
     background-color:rgba(193, 193, 193, 0.517);
 }
 
-#passwordInputBox {
-    width: 227px;
-    margin-left: calc(50% - 90px);
+.inputBox {
+    width: 200px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.underLine {
+    margin: 0 auto;
+    position: relative;
+    border-bottom: 1px solid #c2c2c2;
+    width: 200px;
+}
+
+.underLine::before,
+.underLine::after {
+    position: absolute; 
+    width: 0px; /*アニメーションで0pxから50%に*/
+    height: 1px; /*高さ*/
+    content: '';
+    background-color: #07008d; /*アニメーションの色*/
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+.underLine::before {
+    left: 50%; /*中央配置*/
+}
+
+/*中央から左へのアニメーション*/
+.underLine::after { 
+    right: 50%; /*中央配置*/
+}
+
+.inputBox:focus + .underLine::before,
+.inputBox:focus + .underLine::after {
+    width: 50%;
 }

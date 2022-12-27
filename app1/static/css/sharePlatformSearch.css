@@ -45,12 +45,12 @@ h1 {
 
 .article a h2 {
     margin: 0;
-    padding: 10px 0;
+    padding-top: 10px;
 }
 
 .article {
     border-bottom: 2px solid rgb(210, 208, 208);
-    padding: 0 40px;
+    padding: 0 35px;
 }
 
 .noArticle p {
@@ -69,7 +69,7 @@ h1 {
 }
 
 .user {
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .content {
@@ -77,9 +77,9 @@ h1 {
     font-size: 18px;
 }
 
-.user span {
-    font-size: 16px;
-    padding: 0 20px;
+.postTime {
+    font-size: 15px;
+    padding-top: 5px;
 }
 
 .article:active {
@@ -145,7 +145,7 @@ h1 {
     width: 0px; /*アニメーションで0pxから50%に*/
     height: 1px; /*高さ*/
     content: '';
-    background-color: #72eded; /*アニメーションの色*/
+    background-color: #07008d; /*アニメーションの色*/
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
 }
@@ -183,4 +183,15 @@ h1 {
 .articleHeader span {
     font-weight: normal;
     font-size: 17px;
+}
+
+#missAnswer {
+    color: rgb(193, 0, 0);
+    font-size: 19px;
+    padding-left: 20px;
+}
+
+#correctAnswer {
+    font-size: 19px;
+    padding-left: 20px;
 }

@@ -12,7 +12,7 @@
     box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
 }
 
-h1, h2 {
+h1#explain, h2 {
     text-align: center;
     border-bottom: 1px solid rgb(118, 118, 118);
     margin-left: auto;
@@ -39,8 +39,13 @@ ol {
 p {
     text-align: center;
     font-size: 18px;
+    line-height: 2;
 }
 
 #wrapper {
     overflow: auto;
+}
+
+.orderList ol li {
+    line-height: 2;
 }

@@ -9,6 +9,14 @@ body {
 	width: 100%;
 	height: 100%;
 	background-color:#040828; /*背景色*/
+    z-index: -2;
+    position: fixed;
+}
+
+#mist {
+    background-color:rgba(255, 255, 255, 0);
+	width: 100%;
+	height: 100%;
     z-index: -1;
     position: fixed;
 }
@@ -46,20 +54,22 @@ ul li a {
     display: block;
     text-decoration: none;
     color: black;
-    margin: 0;
-    padding: 0 23px;
     font-size: 18px;
     font-weight: bold;
+}
+
+ nav ul li {
     text-align: center;
+    padding: 0px 23px;
+}
+
+li.border {
+    border-right: 1px solid rgb(234, 234, 234);
+    box-shadow: 1px 0 0 rgb(195, 195, 195);
 }
 
 ul li a:hover {
     color: gray;
-}
-
-.border {
-    border-right: 1px solid rgb(234, 234, 234);
-    box-shadow: 1px 0 0 rgb(195, 195, 195);
 }
 
 ::-webkit-scrollbar{

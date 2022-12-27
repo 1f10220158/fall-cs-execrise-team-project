@@ -11,12 +11,13 @@
 
 <body>
     <div id="particles-js">
+        <div id="mist">
         <div id="wrapper">
             <nav>
                 <ul>
-                    <li><a href="{% url 'index' %}" class="border">Home</a></li>
-                    <li><a href="{% url 'sharePlatformSearch' %}" class="border">Article Search</a></li>
-                    <li><a href="{% url 'sharePlatformPost' %}" class="border">Article Post</a></li>
+                    <li class="border"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
+                    <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
                     <li><a href="{% url 'login' %}" id="user">Login</a></li>
                 </ul>
             </nav>
@@ -29,24 +30,25 @@
 
                         <!--ユーザーネーム入力欄-->
                         <div class="inBox">
-                            <label for="userid">ユーザーID<br>
-                                <input id="userid" name="userid" type="text" placeholder="User ID" required>
-                            </label>
+                            <label for="userid">ユーザーID</label><br>
+                            <input id="userid" class="inputBox" name="userid" type="text" placeholder="User ID" required>
+                            <div class="underLine"></div>
                         </div>
 
                         <!--パスワード入力欄-->
                         <div class="inBox">
-                            <label for="pssword">パスワード<br>
-                                <input id="password" name="password" type="text" placeholder="Password" required>
-                            </label>
+                            <button type="button" id="unclose"><img src="{% static 'images/unclose.png' %}" alt="unclose" width="30px"></button>
+                            <label for="pssword">パスワード</label><br>
+                            <input class="inputBox" id="password" name="password" type="password" placeholder="Password" required>
+                            <div class="underLine"></div>
                         </div>
-
-                        <button type="submit" id="buttonForCreate">Go</button>
+                        <button type="submit" id="sunmitBotton">Go</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
@@ -90,6 +92,20 @@
                 "; path=" + path +
                 "; max-age=" + maxAge +
                 "; samesite=" + samesite;
+        })
+
+        //パスワード欄を一瞬だけ見えるようにする機能
+        const uncloseElement = document.getElementById("unclose");
+        const passwordElement = document.getElementById("password");
+
+        uncloseElement.addEventListener("mousedown", (event) => {
+            event.preventDefault();
+            passwordElement.type = "text";
+        })
+
+        uncloseElement.addEventListener("mouseup", (event) => {
+            event.preventDefault();
+            passwordElement.type = "password";
         })
     </script>
 </body>
