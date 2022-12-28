@@ -12,87 +12,100 @@
 <body>
     <div id="particles-js">
         <div id="mist">
-        <div id="wrapper">
-            <div id="header">
-                <nav>
-                    <ul>
-                        <li class="border"><a href="{% url 'index' %}">Home</a></li>
-                        <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
-                        <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
-                        <li><a href="{% url 'login' %}" id="user">Login</a></li>
-                    </ul>
-                </nav>
-            </div>
-        
-
-            <div id="main">
-                <div id="rightBox">
-                <div class="articleBox">
-                    <h1 id="explain">BreakingCipherとは</h1>
-
-                    <!-- このサイトの説明を追加予定-->
-                    <h3>このサイトでは、大きく3つのことができます</h3>
-                    <div class="orderList">
-                        <ol>
-                            <li>ユーザー自身が暗号を投稿できる！</li>
-                            <li>それらを他のユーザー達とコメントしながら解読できる!</li>
-                            <li>公式が出題する暗号を他のユーザーとタイムで競い合いながら解読できる!</li>
-                        </ol>
-                    </div>
+            <div id="wrapper">
+                <div id="header">
+                    <nav>
+                        <ul>
+                            <li class="border"><a href="{% url 'index' %}">Home</a></li>
+                            <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
+                            <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
+                            <li><a href="{% url 'login' %}" id="user">Login</a></li>
+                        </ul>
+                    </nav>
                 </div>
 
-                <div class="articleBox">
-                    <h2 id="HowToPost">記事の投稿方法</h2>
+                <div id="main">
+                    <div id="container">
+                        <div id="leftBox">
+                            <div class="articleBox">
+                                <h1 id="explain">BreakingCipherとは</h1>
 
-                    <!--記事の投稿の仕方-->
-                    <h3>記事を投稿するには、5つの手順を踏むだけ!</h3>
+                                <!-- このサイトの説明を追加予定-->
+                                <h3>このサイトでは、大きく3つのことができます</h3>
+                                <div class="orderList">
+                                    <ol>
+                                        <li>ユーザー自身が暗号を投稿できる！</li>
+                                        <li>それらを他のユーザー達とコメントしながら解読できる!</li>
+                                        <li>公式が出題する暗号を他のユーザーとタイムで競い合いながら解読できる!</li>
+                                    </ol>
+                                </div>
+                            </div>
 
-                    <div class="orderList">
-                        <ol>
-                            <li>ホームページから記事一覧をクリック!</li>
-                            <li>ユーザーIDを公開して投稿するか、匿名IDとして投稿するかを選択</li>
-                            <li>タイトルと暗号の説明を入力</li>
-                            <li>暗号をPDF形式かファイル形式でアップロード</li>
-                            <li>「投稿する」をクリックすれば完了!</li>
-                        </ol>
+                            <div class="articleBox">
+                                <h2 id="HowToPost">記事の投稿方法</h2>
+
+                                <!--記事の投稿の仕方-->
+                                <h3>記事を投稿するには、5つの手順を踏むだけ!</h3>
+
+                                <div class="orderList">
+                                    <ol>
+                                        <li>ホームページから記事一覧をクリック!</li>
+                                        <li>ユーザーIDを公開して投稿するか、匿名IDとして投稿するかを選択</li>
+                                        <li>タイトルと暗号の説明を入力</li>
+                                        <li>暗号をPDF形式かファイル形式でアップロード</li>
+                                        <li>「投稿する」をクリックすれば完了!</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <div class="articleBox">
+
+                                <h2>このサイトについて</h2>
+
+                                <!--公式暗号についての説明-->
+                                <p id="explainForCipher">このサイト内にはいくつかの暗号が...<br>
+                                    それらを見つけ、解読してみよう!<br>
+                                    その解読時間で全国のユーザー達と競い合うことができます!<br>
+                                    あなたはいくつ見つけられるかな？
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div id="rightBox">
+                            <h1 id="xxTitle">XXXX</h1>
+                            <div id="xxBox">
+                                <p>32</p>
+                                <p>cipher</p>
+                                <p>1383</p>
+                                <p>3061</p>
+                                <p>3867</p>
+                                <p>2842</p>
+                                <p>1939</p>
+                                <p>2726</p>
+                                <p>1836</p>
+                            </div>
+                            <div id="xxFormBox">
+                                <form id="xxForm">
+                                    {% csrf_token %}
+                                    <input name="xxInputBox" id="xxInputBox" required>
+                                </form>
+                            </div>
+                            <div id="result"></div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="articleBox">
-
-                    <h2>このサイトについて</h2>
-
-                    <!--公式暗号についての説明-->
-                    <p>このサイト内にはいくつかの暗号が...<br>
-                        それらを見つけ、解読してみよう!<br>
-                        その解読時間で全国のユーザー達と競い合うことができます!<br>
-                        あなたはいくつ見つけられるかな？
-                    </p>
-                </div>
-            </div>
-            </div>
-
-            <div id="leftBox">
-                <h1 id="xxtitle">xxxxxxxxxxxxxx</h1>
-                <div>
-                    <div class="xxbox">
-                    <p>32</p>
-                    <p>cipher</p>
-                    </div>
-                    <div class="xxbox">
-                    <p>1383</p>
-                    <p>3061</p>
-                    <p>3867</p>
-                    <p>2842</p>
-                    <p>1939</p>
-                    <p>2726</p>
-                    <p>1836</p>
+                    <div id="underBox">
+                        <p>sample</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div id="display">
+    </div>
+    <p id="alartString">
+    </p>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script src="{% static 'js/index.js' %}" defer></script>
@@ -103,6 +116,52 @@
             userElement.textContent = userID;
             userElement.removeAttribute("href");
         }
+
+        const xxFormElement = document.getElementById("xxForm");
+
+        xxFormElement.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const form = new FormData(xxFormElement);
+            fetch("{% url 'index' %}", {
+                method: "POST",
+                body: form,
+            })
+            .then(response => {
+                return response.text();
+            })
+            .then(text => {
+                if (text === "correct") {
+                    const resultElement = document.getElementById("result");
+                    resultElement.innerHTML = "<p>正解です</p>";
+                    xxInputBoxElement.value = "";
+                } else {
+                    const string = "その回答は求められていません";
+                    const array = [];
+                    for (const i of string) {
+                        array.push(i);
+                    }
+                    const xxInputBoxElement = document.getElementById("xxInputBox");
+                    const displayElement = document.getElementById("display");
+                    const alartStringElement = document.getElementById("alartString");
+                    xxInputBoxElement.disabled = true;
+                    xxInputBoxElement.value = "";
+                    const intervalId = setInterval(() => {
+                        alartStringElement.textContent += array.shift();
+                        if (array.length === 0) {
+                            clearInterval(intervalId);
+                            setTimeout(() => {
+                                displayElement.innerHTML = `<img  id='broken_display' src='{% static "images/broken_display.png" %}' alt='display'>
+                                                        <img  id='guard' src='{% static "images/opacity.png" %}' alt='display'>`;
+                            }, 200);
+                            setTimeout(() => {
+                                alert("リロードしてください");
+                            }, 400);
+                        }
+                    }, 80);
+                }
+            })
+        })
     </script>
 </body>
+
 </html>

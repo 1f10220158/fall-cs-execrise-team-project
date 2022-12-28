@@ -3,13 +3,21 @@ from django.http import HttpResponse, JsonResponse
 from app1.models import *
 
 def index(request):
+    if request.method == "POST":
+        answer = request.POST.get("xxInputBox").lower().strip()
+        
+        if answer == "cryphographies":
+            return HttpResponse("correct")
+        else:
+            return HttpResponse("miss")
 
-    #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
-    if "userid" in request.COOKIES:
-        return render(request, "index.html", request.COOKIES)
+    else:
+        #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
+        if "userid" in request.COOKIES:
+            return render(request, "index.html", request.COOKIES)
     
-    #ない場合は"ログイン"のまま返す
-    return render(request, "index.html")
+        #ない場合は"ログイン"のまま返す
+        return render(request, "index.html")
 
 def create_account(request):
 
@@ -141,8 +149,8 @@ def articles_search(request):
 
 def get_answer(request):
     posted_article_id = request.POST["articleId"]
-    correct_answer = list(Article.objects.filter(article_id=posted_article_id).values())[0]['answer']
-    answer = request.POST["answer"]
+    correct_answer = list(Article.objects.filter(article_id=posted_article_id).values())[0]['answer'].lower().strip()
+    answer = request.POST["answer"].lower().strip()
 
     if correct_answer == answer:
         result = "正解です"
