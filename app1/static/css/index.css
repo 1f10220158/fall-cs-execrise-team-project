@@ -6,7 +6,6 @@
 
 #leftBox, #rightBox, #underBox {
     background-color: white;
-    padding: 35px;
     border-radius: 10px;
     border: 1px solid rgb(177, 177, 177);
     box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
@@ -14,21 +13,25 @@
 }
 
 #leftBox {
-    min-width: 500px;
+    padding: 35px;
+    min-width: 350px;
     max-width: 950px;
     width: 65%;
     margin-right: 0;
 }
 
 #rightBox  {
+    padding: 35px;
     width: 40%;
     min-width: 220px;
     max-width: 600px;
+    height: 50%;
 }
 
 #underBox {
     margin-top: 0;
-    min-width: 830px;
+    min-width: 890px;
+    padding: 25px;
 }
 
 h1#explain, h2 {
@@ -43,7 +46,7 @@ h3 {
 }
 
 .orderList {
-    width: 530px;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -96,14 +99,20 @@ h1#xxTitle {
 }
 
 #xxInputBox {
-    height: 100px;
+    height: 50px;
     width: 100%;
     outline: none;
-    border: none;
-    border-bottom: 1px solid rgb(47, 47, 47);
-    background-color: rgba(225, 225, 225, 0.555);
-    font-size: 23px;
-    white-space: normal;
+    border: 2px solid #505050;
+    background-color: rgba(227, 227, 227, 0.448);
+    font-size: 18px;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+#xxInputBox:focus {
+    border: 2px solid rgba(1, 5, 115, 0.629);
+    background-color:rgba(1, 5, 115, 0.131);
+    transition: all 0.7s;
 }
 
 #xxFormBox {
@@ -118,4 +127,63 @@ h1#xxTitle {
     z-index: 2;
     color: rgb(193, 0, 0);
     margin: 0;
+}
+
+td, th {
+    border: 1px dotted rgb(1, 4, 115);
+    height: 30px;
+    text-align: center;
+}
+
+th {
+    background-color: rgba(1, 5, 115, 0.4);
+    color: rgb(1, 4, 115);
+}
+
+#tableContainer {
+    display: flex;
+    justify-content: left;
+}
+
+table {
+    width: 30%;
+    margin: 10px;
+    border: 2px solid rgb(1, 4, 115);
+    border-collapse: collapse;
+}
+
+td.num {
+    min-width: 40px;
+    font-weight: bold;
+    color: rgb(1, 4, 115);
+    background-color: rgba(1, 5, 115, 0.2);
+}
+
+td.userid {
+    min-width: 50px;
+    font-size: 16px;
+}
+
+td.time {
+    min-width: 140px;
+    font-size: 15px;
+}
+
+#tableTitle {
+    line-height: 1.4;
+    margin: 0;
+    padding-left: 30px;
+    border-bottom:1px solid rgb(72, 72, 72);
+}
+
+#first {
+    background-color:rgba(235, 241, 124, 0.5);
+}
+
+#second {
+    background-color:rgba(97, 97, 97, 0.5)
+}
+
+#third {
+    background-color: rgba(108, 77, 4, 0.5)
 }

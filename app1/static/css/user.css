@@ -46,7 +46,7 @@
 
 #unclose {
     position: absolute;
-    top: 45%;
+    top: 60%;
     left: 71%;
     border: none;
     outline: none;
@@ -98,4 +98,9 @@
 .inputBox:focus + .underLine::before,
 .inputBox:focus + .underLine::after {
     width: 50%;
+}
+
+#required {
+    font-size: 15px;
+    margin: 10px 0;
 }

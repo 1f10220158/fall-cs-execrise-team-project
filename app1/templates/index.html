@@ -88,14 +88,99 @@
                             <div id="xxFormBox">
                                 <form id="xxForm">
                                     {% csrf_token %}
-                                    <input name="xxInputBox" id="xxInputBox" required>
+                                    <input name="xxInputBox" id="xxInputBox" placeholder="input..." required>
                                 </form>
                             </div>
                             <div id="result"></div>
                         </div>
                     </div>
                     <div id="underBox">
-                        <p>sample</p>
+                        <h1 id="tableTitle">Ranking</h1>
+                        <div id="tableContainer">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>順位</th>
+                                        <th>UserID</th>
+                                        <th>Time</th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td class="num" id="first">1</td>
+                                    <td class="userid">{{ times.0.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.0.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num" id="second">2</td>
+                                    <td class="userid">{{ times.1.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.1.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num" id="third">3</td>
+                                    <td class="userid">{{ times.2.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.2.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">4</td>
+                                    <td class="userid">{{ times.3.user_id|default:"" }}</td>
+                                    <td class="time">{{ timess.3.clear_time|default:"" }}</td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="num">5</td>
+                                    <td class="userid">{{ times.4.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.4.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">6</td>
+                                    <td class="userid">{{ times.5.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.5.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">7</td>
+                                    <td class="userid">{{ times.6.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.6.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">8</td>
+                                    <td class="userid">{{ times.7.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.7.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">9</td>
+                                    <td class="userid">{{ times.8.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.8.clear_time|default:"" }}</td>
+                                </tr>
+                            </table>
+                            <table>
+                                <tr>
+                                    <td class="num">10</td>
+                                    <td class="userid">{{ times.9.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.9.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">11</td>
+                                    <td class="userid">{{ times.10.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.10.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">12</td>
+                                    <td class="userid">{{ times.11.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.11.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">13</td>
+                                    <td class="userid">{{ times.12.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.12.clear_time|default:"" }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="num">14</td>
+                                    <td class="userid">{{ times.13.user_id|default:"" }}</td>
+                                    <td class="time">{{ times.13.clear_time|default:"" }}</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -122,44 +207,45 @@
         xxFormElement.addEventListener("submit", (event) => {
             event.preventDefault();
             const form = new FormData(xxFormElement);
+            const xxInputBoxElement = document.getElementById("xxInputBox");
             fetch("{% url 'index' %}", {
-                method: "POST",
-                body: form,
-            })
-            .then(response => {
-                return response.text();
-            })
-            .then(text => {
-                if (text === "correct") {
-                    const resultElement = document.getElementById("result");
-                    resultElement.innerHTML = "<p>正解です</p>";
-                    xxInputBoxElement.value = "";
-                } else {
-                    const string = "その回答は求められていません";
-                    const array = [];
-                    for (const i of string) {
-                        array.push(i);
-                    }
-                    const xxInputBoxElement = document.getElementById("xxInputBox");
-                    const displayElement = document.getElementById("display");
-                    const alartStringElement = document.getElementById("alartString");
-                    xxInputBoxElement.disabled = true;
-                    xxInputBoxElement.value = "";
-                    const intervalId = setInterval(() => {
-                        alartStringElement.textContent += array.shift();
-                        if (array.length === 0) {
-                            clearInterval(intervalId);
-                            setTimeout(() => {
-                                displayElement.innerHTML = `<img  id='broken_display' src='{% static "images/broken_display.png" %}' alt='display'>
-                                                        <img  id='guard' src='{% static "images/opacity.png" %}' alt='display'>`;
-                            }, 200);
-                            setTimeout(() => {
-                                alert("リロードしてください");
-                            }, 400);
+                    method: "POST",
+                    body: form,
+                })
+                .then(response => {
+                    return response.text();
+                })
+                .then(text => {
+                    if (text === "true") {
+                        const resultElement = document.getElementById("result");
+                        resultElement.innerHTML = "<p>正解です</p>";
+                        xxInputBoxElement.value = "";
+                    } else {
+                        const string = "その回答は求められていません";
+                        const array = [];
+                        for (const i of string) {
+                            array.push(i);
                         }
-                    }, 80);
-                }
-            })
+                        const displayElement = document.getElementById("display");
+                        const alartStringElement = document.getElementById("alartString");
+                        xxInputBoxElement.disabled = true;
+                        xxInputBoxElement.value = "";
+                        const intervalId = setInterval(() => {
+                            alartStringElement.textContent += array.shift();
+                            if (array.length === 0) {
+                                clearInterval(intervalId);
+                                setTimeout(() => {
+                                    displayElement.innerHTML =
+                                        `<img  id='broken_display' src='{% static "images/broken_display.png" %}' alt='display'>
+                                                        <img  id='guard' src='{% static "images/opacity.png" %}' alt='display'>`;
+                                }, 200);
+                                setTimeout(() => {
+                                    alert("リロードしてください");
+                                }, 400);
+                            }
+                        }, 80);
+                    }
+                })
         })
     </script>
 </body>

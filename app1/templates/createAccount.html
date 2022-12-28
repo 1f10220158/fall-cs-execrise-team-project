@@ -12,44 +12,46 @@
 <body>
     <div id="particles-js">
         <div id="mist">
-        <div id="wrapper">
-            <nav>
-                <ul>
-                    <li class="border"><a href="{% url 'index' %}">Home</a></li>
-                    <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
-                    <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
-                    <li><a href="{% url 'login' %}" id="user">Login</a></li>
-                </ul>
-            </nav>
+            <div id="wrapper">
+                <nav>
+                    <ul>
+                        <li class="border"><a href="{% url 'index' %}">Home</a></li>
+                        <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
+                        <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
+                        <li><a href="{% url 'login' %}" id="user">Login</a></li>
+                    </ul>
+                </nav>
 
-            <div id="main">
-                <h1>アカウント作成</h1>
-                <div id="inputBox">
-                    <form id="pushUserData" action="{% url 'createAccount' %}" method="POST">
-                        {% csrf_token %}
+                <div id="main">
+                    <h1>アカウント作成</h1>
+                    <div id="inputBox">
+                        <form id="pushUserData">
+                            {% csrf_token %}
 
-                        <!--ユーザーネーム入力欄-->
-                        <div class="inBox">
-                            <label for="userid">ユーザーID</label><br>
-                            <input id="userid" class="inputBox" name="userid" type="text" placeholder="User ID" required>
-                            <div class="underLine"></div>
-                        </div>
+                            <!--ユーザーネーム入力欄-->
+                            <div class="inBox">
+                                <label for="userid">ユーザーID</label><br>
+                                <input id="userid" class="inputBox" name="userid" type="text" placeholder="User ID">
+                                <div class="underLine"></div>
+                            </div>
 
-                        <!--パスワード入力欄-->
-                        <div class="inBox">
-                            <button type="button" id="unclose"><img src="{% static 'images/unclose.png' %}" alt="unclose" width="30px"></button>
-                            <label for="pssword">パスワード</label><br>
-                            <input class="inputBox" id="password" name="password" type="password" placeholder="Password" required>
-                            <div class="underLine"></div>
-                        </div>
-                        <button type="submit" id="sunmitBotton">Go</button>
-                    </form>
+                            <!--パスワード入力欄-->
+                            <div class="inBox">
+                                <button type="button" id="unclose"><img src="{% static 'images/unclose.png' %}"
+                                        alt="unclose" width="30px"></button>
+                                <label for="password">パスワード<br><span id="required">(英数字5桁以上)</span></label><br>
+                                <input class="inputBox" id="password" name="password" type="password"
+                                    placeholder="Password">
+                                <div class="underLine"></div>
+                            </div>
+                            <button type="submit" id="submitBotton">Go</button>
+                        </form>
+                        <div id="errorBox"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script src="{% static 'js/index.js' %}" defer></script>
@@ -65,33 +67,71 @@
         /* cookie関連 */
         const pushUserData = document.getElementById('pushUserData');
 
-        pushUserData.addEventListener("submit", () => {
-            const userid = document.getElementById('userid').value;
-            const password = document.getElementById('password').value;
+        pushUserData.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const form = new FormData(pushUserData);
+            fetch("{% url 'createAccount' %}", {
+                method: "POST",
+                body: form
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(json => {
+                if (json.result) {    
+                    const userid = document.getElementById('userid').value;
+                    const password = document.getElementById('password').value;
 
-            /* cookie保存の詳細:
+                    /* cookie保存の詳細:
             
-            path= 'cookieが有効になる文書のパス'
-            max-age= cookieの有効期限(秒)
-            samesite= lax または strict (xsrf攻撃対策) 
+                    path= 'cookieが有効になる文書のパス'
+                    max-age= cookieの有効期限(秒)
+                    samesite= lax または strict (xsrf攻撃対策) 
             
-            */
+                    */
 
-            const path = '/';
-            const maxAge = '60*60*24*30';
-            const samesite = 'lax';
+                    const path = '/';
+                    const maxAge = '60*60*24*30';
+                    const samesite = 'lax';
 
-            /*userIDをcookieに保存*/
-            document.cookie = "userid=" + userid +
-                "; path=" + path +
-                "; max-age=" + maxAge +
-                "; samesite=" + samesite;
+                    /*userIDをcookieに保存*/
+                    document.cookie = "userid=" + userid +
+                        "; path=" + path +
+                        "; max-age=" + maxAge +
+                        "; samesite=" + samesite;
 
-            /*passwordをcookieに保存*/
-            document.cookie = "password=" + password +
-                "; path=" + path +
-                "; max-age=" + maxAge +
-                "; samesite=" + samesite;
+                    /*passwordをcookieに保存*/
+                    document.cookie = "password=" + password +
+                        "; path=" + path +
+                        "; max-age=" + maxAge +
+                        "; samesite=" + samesite;
+                    
+                    window.location.href = "{% url 'createAccountEnd' %}";
+
+                } else {
+                    let errortexts = "";
+                    if (json.existed) {
+                        errortexts += "既に使われているユーザIDです<br>";
+                    };
+                    if (json.none_user_id_or_password) {
+                        errortexts += "ユーザIDまたはパスワードが入力されていません<br>";
+                    };
+                    if (json.less_password) {
+                        errortexts += "パスワードが5文字未満です<br>";
+                    };
+                    if (json.blank_exist) {
+                        errortexts += "途中に空白文字が含まれています<br>";
+                    };
+                    if (json.none_number_or_word_in_password) {
+                        errortexts += "数字または文字が含まれていません<br>";
+                    };
+                    if (json.inappropriate_letter_exist) {
+                        errortexts += "パスワードに英数字以外の文字が含まれています";
+                    };
+                    const errorElement = document.getElementById("errorBox");
+                    errorElement.innerHTML = "<p id='error'>" + errortexts +"</p>";
+                }
+            })
         })
 
         //パスワード欄を一瞬だけ見えるようにする機能

@@ -1,23 +1,39 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from app1.models import *
+import re
 
 def index(request):
     if request.method == "POST":
         answer = request.POST.get("xxInputBox").lower().strip()
         
         if answer == "cryphographies":
-            return HttpResponse("correct")
+            if "userid" in request.COOKIES:
+                user_id = request.COOKIES["userid"]
+                if not TimeforOfficial.objects.get(user_id=user_id):
+                    correct_data = TimeforOfficial(
+                        user_id = User.objects.get(user_id=user_id)
+                    )
+                    correct_data.save()
+            return HttpResponse("true")
         else:
-            return HttpResponse("miss")
+            return HttpResponse("false")
 
     else:
         #cookieにユーザデータがあったらindex.htmlの"ログイン"のところをユーザIDに変える
         if "userid" in request.COOKIES:
-            return render(request, "index.html", request.COOKIES)
+            context = {
+                "times": TimeforOfficial.objects.all()[:10],
+                "userid": request.COOKIES["userid"],
+                "password": request.COOKIES["password"]
+            }
+            return render(request, "index.html", context)
+        context = {
+            "times": TimeforOfficial.objects.all()[:10]
+        }
     
         #ない場合は"ログイン"のまま返す
-        return render(request, "index.html")
+        return render(request, "index.html", context)
 
 def create_account(request):
 
@@ -30,13 +46,37 @@ def create_account(request):
     
     #POSTの場合
     else:
-        userid = request.POST["userid"]
-        password = request.POST["password"]
+        user_id = request.POST["userid"].strip()
+        password = request.POST["password"].strip()
+        dict = {}
+        user_id_lst = User.objects.values_list('user_id', flat=True)
+        if user_id in user_id_lst:
+            dict["existed"] = 1
 
-        #ユーザidとパスワードをデータベースに保存
-        user_data = User(user_id=userid, password=password)
-        user_data.save()
-        return render(request, "createAccountEnd.html", request.COOKIES)
+        if not (user_id and password):
+            dict["none_user_id_or_password"] = 1
+
+        if len(password) < 5:
+            dict["less_password"] = 1
+
+        if re.search(r"\s", password) or re.search(r"\s", user_id):
+            dict["blank_exist"] = 1
+
+        if not re.search(r"\w", password):
+            dict["none_number_or_word_in_password"] = 1
+
+        if re.search(r"\W", password):
+            dict["inappropriate_letter_exist"] = 1
+
+        if len(dict) == 0:
+            user_data = User(
+                user_id = request.POST["userid"],
+                password = request.POST["password"]
+            )
+            user_data.save()
+            return JsonResponse({"result": 1})
+        dict["result"] = 0
+        return JsonResponse(dict)
 
 def login(request):
     if request.method == "POST":
@@ -85,13 +125,11 @@ def share_platform_post(request):
         
         #匿名で投稿する場合
         else:
-            login_or_anonymous = 0
-
             article = Article(
                     article_data = request.FILES["articleData"],
                     title = request.POST["title"],
                     content = request.POST["content"],
-                    login_or_anonymous = login_or_anonymous,
+                    login_or_anonymous = 0,
                     answer = request.POST["answer"],
                 )
         article.save()

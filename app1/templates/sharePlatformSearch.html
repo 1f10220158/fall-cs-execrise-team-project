@@ -12,104 +12,109 @@
 <body>
     <div id="particles-js">
         <div id="mist">
-        <div id="wrapper">
-            <div id="header">
-                <nav>
-                    <ul>
-                        <li class="border"><a href="{% url 'index' %}">Home</a></li>
-                        <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
-                        <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
-                        <li><a href="{% url 'login' %}" id="user">Login</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <div id="wrapper">
+                <div id="header">
+                    <nav>
+                        <ul>
+                            <li class="border"><a href="{% url 'index' %}">Home</a></li>
+                            <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
+                            <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
+                            <li><a href="{% url 'login' %}" id="user">Login</a></li>
+                        </ul>
+                    </nav>
+                </div>
 
-            <div id="main">
-                <div id="leftBox">   
-                    <div class="leftBoxTop">
-                    <h1>記事一覧</h1>
-                    <div id="pageMove">
-                        <a href="{% url 'sharePlatformPost' %}">※記事を投稿する場合はこちら</a>
+                <div id="main">
+                    <div id="leftBox">
+                        <div class="leftBoxTop">
+                            <h1>記事一覧</h1>
+                            <div id="pageMove">
+                                <a href="{% url 'sharePlatformPost' %}">※記事を投稿する場合はこちら</a>
+                            </div>
+
+                            <!--検索ボックス-->
+                            <form method="GET" action="{% url 'articlesSearch' %}">
+                                {% csrf_token %}
+                                <div id="leftBoxBottom">
+                                    <label for="search"><img class="inputBoxImg"
+                                            src="{% static 'images/search_image.png' %}" alt="虫眼鏡の画像"
+                                            width="22px"></label>
+                                    <input type="text" id="search" class="inputBox" name="search" placeholder="記事を検索する"
+                                        required>
+                                    <div class="textUnderLine"></div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="articleBox">
+
+                            <!--投稿記事一覧欄-->
+                            {% if articles %}
+
+                            {% for article in articles %}
+                            <div class="article">
+                                <a href="#preview"
+                                    onclick="articleClick('media/{{ article.article_data }}', '{{ article.article_id }}')">
+                                    <div class="articleHeader">
+                                        <h2>{{ article.title }}
+                                            {% for answered_article in answered %}
+                                            {% if answered_article.article_id_id == article.article_id %}
+                                            <span>(回答済み)</span>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </h2>
+                                    </div>
+
+                                    {% if article.login_or_anonymous == 1 %}
+                                    <p class="user">{{ article.user_id }} さん</p>
+                                    <p class="postTime">投稿日: {{ article.post_time }}</p>
+                                    {% else %}
+                                    <p class="user">匿名ID さん</p>
+                                    <p class="postTime">投稿日: {{ article.post_time }}</p>
+                                    {% endif %}
+
+                                    <p class="content">{{ article.content }}</p>
+                                </a>
+                            </div>
+                            {% endfor %}
+
+                            {% else %}
+                            <div class="noArticle">
+                                <p>記事が見つかりませんでした。</p>
+                            </div>
+                            {% endif %}
+                        </div>
                     </div>
 
-                        <!--検索ボックス-->
-                        <form method="GET" action="{% url 'articlesSearch' %}">
+                    <div id="rightBox">
+
+                        <!--記事のプレビュー-->
+                        <div id="preview">
+                            <div>
+                                <p>Article<br>showed<br>here</p>
+                            </div>
+                        </div>
+
+                        <form id="formAnswer">
                             {% csrf_token %}
-                            <div id="leftBoxBottom">
-                                <label for="search"><img class="inputBoxImg" src="{% static 'images/search_image.png' %}" alt="虫眼鏡の画像"
-                                    width="22px"></label>
-                                <input type="text" id="search" class="inputBox" name="search" placeholder="記事を検索する" required>
+                            <input type="hidden" name="articleId" id="articleId" value="">
+                            <div id="answerBox">
+                                <label for="answer">
+                                    <img src="{% static 'images/answer_image.png' %}" class="inputBoxImg" alt="A.の画像"
+                                        width="22px">
+                                </label>
+                                <input type="text" id="answer" class="inputBox" name="answer" placeholder="答えを入力する"
+                                    required>
                                 <div class="textUnderLine"></div>
+                                <div id="result">
+                                </div>
                             </div>
                         </form>
                     </div>
-
-                    <div class="articleBox">
-
-                        <!--投稿記事一覧欄-->
-                        {% if articles %}
-
-                        {% for article in articles %}
-                        <div class="article">
-                            <a href="#preview" onclick="articleClick('media/{{ article.article_data }}', '{{ article.article_id }}')">
-                                <div class="articleHeader">
-                                <h2>{{ article.title }}
-                                {% for answered_article in answered %}
-                                {% if answered_article.article_id_id == article.article_id %}
-                                <span>(回答済み)</span>
-                                {% endif %}
-                                {% endfor %}
-                                </h2>
-                                </div>
-
-                                {% if article.user_id %}
-                                <p class="user">{{ article.user_id }} さん</p>
-                                <p class="postTime">投稿日: {{ article.post_time }}</p>
-                                {% else %}
-                                <p class="user">匿名ID さん</p>
-                                <p class="postTime">投稿日: {{ article.post_time }}</p>
-                                {% endif %}
-
-                                <p class="content">{{ article.content }}</p>
-                            </a>
-                        </div>
-                        {% endfor %}
-
-                        {% else %}
-                        <div class="noArticle">
-                            <p>記事が見つかりませんでした。</p>
-                        </div>
-                        {% endif %}
-                    </div>
-                </div>
-
-                <div id="rightBox">
-
-                    <!--記事のプレビュー-->
-                    <div id="preview">
-                        <div>
-                            <p>Article<br>showed<br>here</p>
-                        </div>
-                    </div>
-
-                    <form id="formAnswer">
-                        {% csrf_token %}
-                        <input type="hidden" name="articleId" id="articleId" value="">
-                        <div id="answerBox">
-                        <label for="answer">
-                            <img src="{% static 'images/answer_image.png' %}" class="inputBoxImg" alt="A.の画像" width="22px">
-                        </label>
-                            <input type="text" id="answer" class="inputBox" name="answer" placeholder="答えを入力する" required>
-                            <div class="textUnderLine"></div>
-                            <div id="result">
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script src="{% static 'js/index.js' %}" defer></script>
