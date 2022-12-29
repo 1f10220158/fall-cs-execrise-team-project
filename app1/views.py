@@ -10,7 +10,7 @@ def index(request):
         if answer == "cryphographies":
             if "userid" in request.COOKIES:
                 user_id = request.COOKIES["userid"]
-                if not TimeforOfficial.objects.get(user_id=user_id):
+                if not TimeforOfficial.objects.filter(user_id=user_id):
                     correct_data = TimeforOfficial(
                         user_id = User.objects.get(user_id=user_id)
                     )

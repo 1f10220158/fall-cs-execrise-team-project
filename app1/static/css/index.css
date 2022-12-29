@@ -102,17 +102,17 @@ h1#xxTitle {
     height: 50px;
     width: 100%;
     outline: none;
-    border: 2px solid #505050;
-    background-color: rgba(227, 227, 227, 0.448);
+    border: 1px solid #a2a2a2;
+    background-color: rgb(255, 255, 255);
     font-size: 18px;
     padding-left: 10px;
     border-radius: 10px;
+    transition: all 0.5s, border 0.5s;
 }
 
 #xxInputBox:focus {
-    border: 2px solid rgba(1, 5, 115, 0.629);
+    border: 1px solid rgba(1, 5, 115, 0.762);
     background-color:rgba(1, 5, 115, 0.131);
-    transition: all 0.7s;
 }
 
 #xxFormBox {

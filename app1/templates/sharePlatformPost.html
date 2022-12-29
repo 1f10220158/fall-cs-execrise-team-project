@@ -48,11 +48,13 @@
                                 </ul>
                                 <label for="title" class="label">タイトル</label>
                                 <div class="inputBox">
-                                    <input type="text" id="title" class="textBox" name="title" placeholder="タイトルを入力" required><br>
+                                    <input type="text" id="title" class="textBox" name="title" placeholder="タイトルを入力" required>
+                                    <div class="backgroundInputBox"></div>
                                 </div>
                                 <label for="content" class="label">内容</label>
-                                <div class="inputBox">
+                                <div class="textareaBox">
                                     <textarea name="content" id="content" placeholder="説明を入力" required></textarea>
+                                    <div class="backgroundTextareaBox"></div>
                                 </div>
                             </div>
 
@@ -71,11 +73,12 @@
                                 <label for="answer" class="label">正解</label>
                                 <div class="inputBox">
                                 <input type="text" id="answer" class="textBox" name="answer" placeholder="正解を入力" required>
+                                <div class="backgroundInputBox"></div>
                                 </div>
                             </div>
                         </div>
-                        <div id="button">
-                            <button type="submit">投稿する</button>
+                        <div id="buttonBox">
+                            <button type="submit" id="postBotton">投稿する</button>
                         </div>
                     </form>
                 </div>
@@ -100,13 +103,16 @@
         const instantPreviewElement = document.getElementById("preview");
 
         //ドラッグした時の処理
+        const dropBoxWrapElement = document.getElementById("dropBoxWrap");
+
         dropBoxElement.addEventListener("dragover", (event) => {
             event.preventDefault();
+            dropBoxWrapElement.style.backgroundColor = "rgb(189, 189, 189)";
         });
 
         //ドラッグをやめた時の処理
         dropBoxElement.addEventListener("dragleave", (event) => {
-
+            dropBoxWrapElement.style.backgroundColor = "rgb(189, 189, 189, 0.5)";
         });
 
         //ドロップorアップロードした時の処理

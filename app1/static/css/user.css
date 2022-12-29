@@ -46,7 +46,6 @@
 
 #unclose {
     position: absolute;
-    top: 60%;
     left: 71%;
     border: none;
     outline: none;
@@ -54,6 +53,14 @@
     vertical-align: -10px;
     padding: 0 4px;
     border-radius: 10px;
+}
+
+.uncloseLogin {
+    top: 45%;
+}
+
+.uncloseCreateAccount {
+    top: 60%;
 }
 
 #unclose:active {
@@ -83,7 +90,6 @@
     content: '';
     background-color: #07008d; /*アニメーションの色*/
     transition: all 0.5s;
-    -webkit-transition: all 0.5s;
 }
 
 .underLine::before {
@@ -103,4 +109,24 @@
 #required {
     font-size: 15px;
     margin: 10px 0;
+}
+
+#submitBotton {
+    border: 1px solid rgb(116, 116, 116);
+    border-radius: 7px;
+    height: 30px;
+    width: 90px;
+    background-color: white;
+    font-size: 15px;
+    font-weight:bold;
+    color: rgb(116, 116, 116);
+    padding-bottom: 3px;
+    transition: all 0.5s;
+}
+
+#submitBotton:hover {
+    background-color: rgba(190, 190, 190, 0.458);
+    border: 1px solid rgb(59, 59, 59);
+    color: rgb(59, 59, 59);
+    border-radius: 15px;
 }
