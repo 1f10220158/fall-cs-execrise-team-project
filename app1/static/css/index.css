@@ -30,7 +30,7 @@
 
 #underBox {
     margin-top: 0;
-    min-width: 890px;
+    min-width: 850px;
     padding: 25px;
 }
 
@@ -130,9 +130,11 @@ h1#xxTitle {
 }
 
 td, th {
+    box-sizing: border-box;
     border: 1px dotted rgb(1, 4, 115);
     height: 30px;
     text-align: center;
+    padding: 0 7px;
 }
 
 th {
@@ -153,19 +155,19 @@ table {
 }
 
 td.num {
-    min-width: 40px;
+    min-width: 30px;
     font-weight: bold;
     color: rgb(1, 4, 115);
     background-color: rgba(1, 5, 115, 0.2);
 }
 
 td.userid {
-    min-width: 50px;
+    min-width: 60px;
     font-size: 16px;
 }
 
 td.time {
-    min-width: 140px;
+    min-width: 120px;
     font-size: 15px;
 }
 

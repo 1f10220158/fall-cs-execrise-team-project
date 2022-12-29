@@ -85,7 +85,7 @@
                 return response.text()
             })
             .then(text => {
-                if (text == "True") {
+                if (text === "True") {
                     const path = '/';
                     const maxAge = '60*60*24*30';
                     const samesite = 'lax';
