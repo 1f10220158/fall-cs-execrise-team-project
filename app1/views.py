@@ -213,3 +213,19 @@ def get_answer(request):
     else:
         result = "不正解です"
     return HttpResponse(result)
+
+def user_page(request):
+    if "userid" in request.COOKIES:
+        context = {
+            "answered": UserAnsweredArticle.objects.filter(answer_user_id=request.COOKIES["userid"]),
+            "articles": Article.objects.filter(user_id=request.COOKIES["userid"]),
+            "userid" : request.COOKIES["userid"],
+            "password" : request.COOKIES["password"],
+        }
+
+        return render(request, "userPage.html", context)
+    context = {
+            "articles": Article.objects.all(),
+        }
+
+    return render(request, "userPage.html", context)
