@@ -1,0 +1,254 @@
+@charset "utf-8";
+
+#main {
+    background-color: white;
+    width: 90vw;
+    margin: 0 auto 50px auto;
+    padding: 25px;
+    border: 1.5px solid rgb(180, 180, 180);
+    border-radius: 10px;
+    min-width: 850px;
+    height: 80vh;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
+}
+
+.user {
+    margin: 0;
+}
+
+#articleNum {
+    margin: 0;
+    font-size: 18px;
+    color:rgb(57, 57, 57);
+    margin-bottom: 5px;
+}
+
+#userInformation {
+    border-bottom: 1px solid rgb(46, 46, 46);
+    padding-left: 10px;
+}
+
+#mainMiddleBox {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    height: 85%;
+}
+
+#leftBox h2 {
+    margin: 0 20px 20px 0;
+    border-bottom: 1.5px solid rgb(46, 46, 46);
+    padding: 0 20px;
+    font-size: 23px;
+}
+
+#rightBox {
+    box-sizing: border-box;
+    background-color: white;
+    margin: 0 30px;
+    padding: 30px;
+    width: 45%;
+    min-width: 400px;
+    max-width: 700px;
+    border-radius: 10px;
+    border: 1.5px solid rgb(126, 126, 126);
+    height: 100%;
+}
+
+#leftBox {
+    margin-left: 30px;
+    height: 100%;
+    width: 40%;
+    min-width: 400px;
+}
+
+#articleBox {
+    box-sizing: border-box;
+    overflow: auto;
+    background-color: white;
+    border-radius: 10px;
+    border: 1.5px solid rgb(126, 126, 126);
+    height: calc(100% - 57.5px);
+}
+
+.noArticle p {
+    margin-left: 16px;
+}
+
+.article {
+    padding: 7px 20px;
+    border-bottom: 1.5px solid rgb(205, 205, 205);
+}
+
+.article a {
+    text-decoration: none;
+    color: black;
+}
+
+.article a h3 {
+    font-size: 25px;
+    margin: 0;
+}
+
+.article a p {
+    margin: 0px;
+    margin-bottom: 5px;
+    font-size: 15px
+}
+
+#preview {
+    height: 93%;
+    position: relative;
+}
+
+#deleteBoxAfter {
+    margin: 15px auto auto auto;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid rgb(108, 108, 108);
+    transition: all 0.5s;
+    max-width: 325px;
+}
+
+#deleteBoxAfter:hover {
+    border: 1px solid rgb(16, 12, 77);
+    background-color:rgba(16, 12, 77, 0.297);
+}
+
+#deleteBoxAfter a {
+    text-decoration: none;
+    color: rgb(58, 58, 58);
+    font-size: 18px;
+    padding: 0 80px;
+}
+
+#deleteBoxAfter a:hover {
+    color:rgb(16, 12, 77);
+}
+
+#articleFont {
+    border: 3px solid rgb(155, 155, 155);
+    position: absolute;
+    font-size: 70px;
+    color:rgb(155, 155, 155);
+    text-align: center;
+    font-weight: bold;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    top: -3px;
+    left: -3px;
+}
+
+#articleFont p {
+    position: absolute;
+    margin: 0;
+    top: calc(50% - 52.5px - 3px);
+    left: calc(50% - 120px - 3px);
+}
+
+#alart {
+    position: fixed;
+    z-index: 11;
+    padding: 20px;
+    width: 500px;
+    height: 250px;
+    background-color:rgb(255, 255, 255);
+    border-radius: 10px;
+    top: calc(50% - 200px);
+    left: calc(50% - 250px);
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
+}
+
+#alart h2 {
+    margin: 0;
+    text-align: center;
+    border-bottom:1px solid rgb(85, 85, 85);
+    margin: 0 30px;
+    font-size: 27px;
+}
+
+#deleteArticle {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid rgb(146, 146, 146);
+    border-radius: 10px;
+}
+
+#deleteArticle p, h3 {
+    margin: 0 0 10px 0;
+}
+
+#deleteArticle h3 {
+    font-size: 22px;
+}
+
+.select {
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    border-radius: 10px;
+    border: 1px solid rgb(146, 146, 146);
+}
+
+#yes {
+    padding: 0 30px;
+    margin-right: 60px;
+    transition: all 0.5s;
+}
+
+#yes:hover {
+    background-color: rgba(181, 50, 50, 0.452);
+    border: 1px solid rgb(181, 50, 50);
+    color: rgb(181, 50, 50);
+}
+
+#no:hover {
+    background-color: rgba(50, 81, 181, 0.452);
+    border: 1px solid rgba(50, 81, 181);
+    color: rgba(50, 81, 181);
+}
+
+#no {
+    padding: 0 21.5px;
+    transition: all 0.5s;
+}
+
+#alartUnder {
+    text-align: center;
+}
+
+#backLink {
+    font-size: 17px;
+    text-decoration: none;
+    color: rgb(101, 101, 101);
+    padding: 0 30px;
+    transition: all 0.5s;
+}
+
+#backBox {
+    margin: 20px auto auto auto;
+    width: 100px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid rgb(101, 101, 101);
+    transition: all 0.5s;
+}
+
+#backLink:hover {
+    color: rgb(31, 31, 31);
+}
+
+#backBox:hover {
+    border: 1px solid rgb(31, 31, 31);
+    background-color:rgba(165, 165, 165, 0.45);
+}
+
+#cover {
+    position: fixed;
+    z-index: 10;
+    background-color:rgba(31, 31, 31, 0.396);
+    height: 100vh;
+    width: 100vw;
+}

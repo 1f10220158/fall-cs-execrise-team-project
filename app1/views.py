@@ -25,7 +25,6 @@ def index(request):
             context = {
                 "times": TimeforOfficial.objects.all()[:10],
                 "userid": request.COOKIES["userid"],
-                "password": request.COOKIES["password"]
             }
             return render(request, "index.html", context)
         context = {
@@ -141,7 +140,6 @@ def share_platform_search(request):
             "answered": UserAnsweredArticle.objects.filter(answer_user_id=request.COOKIES["userid"]),
             "articles": Article.objects.all(),
             "userid" : request.COOKIES["userid"],
-            "password" : request.COOKIES["password"],
         }
 
         return render(request, "sharePlatformSearch.html", context)
@@ -175,7 +173,6 @@ def articles_search(request):
         context = {
             "articles": articles,
             "userid" : request.COOKIES["userid"],
-            "password" : request.COOKIES["password"],
         }
 
         return render(request, "sharePlatformSearch.html", context)
@@ -215,17 +212,20 @@ def get_answer(request):
     return HttpResponse(result)
 
 def user_page(request):
-    if "userid" in request.COOKIES:
+    if request.method == "GET":
         context = {
-            "answered": UserAnsweredArticle.objects.filter(answer_user_id=request.COOKIES["userid"]),
             "articles": Article.objects.filter(user_id=request.COOKIES["userid"]),
             "userid" : request.COOKIES["userid"],
-            "password" : request.COOKIES["password"],
         }
 
         return render(request, "userPage.html", context)
-    context = {
-            "articles": Article.objects.all(),
-        }
-
-    return render(request, "userPage.html", context)
+    
+    else:
+        delete_article_id = request.POST["articleId"]
+        user_id = request.POST["userid"]
+        Article.objects.filter(
+            article_id = delete_article_id,
+            user_id = user_id
+        ).delete()
+        
+        return HttpResponse("true")

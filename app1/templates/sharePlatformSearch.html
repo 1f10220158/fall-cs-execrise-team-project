@@ -53,8 +53,7 @@
 
                             {% for article in articles %}
                             <div class="article">
-                                <a href="#preview"
-                                    onclick="articleClick('media/{{ article.article_data }}', '{{ article.article_id }}')">
+                                <a href="#preview" onclick="articleClick('media/{{ article.article_data }}', '{{ article.article_id }}')">
                                     <div class="articleHeader">
                                         <h2>{{ article.title }}
                                             {% for answered_article in answered %}
