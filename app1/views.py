@@ -34,6 +34,16 @@ def index(request):
     
         #ない場合は"ログイン"のまま返す
         return render(request, "index.html", context)
+    if ('sort' in request.GET):
+        #いいね順と新着順と難しい順と解きやすい順の並び替え
+        if request.GET['sort']=='interesting':
+            articles=Article.objects.order_by('-interesting')
+        elif request.GET['sort']=='difficult':
+            articles=Article.objects.order_by('-difficult')
+        elif request.GET['sort']=='easy':
+            articles=Article.objects.order_by('-easy')
+    else:
+        articles=Article.objects.order_by('-posted_at')
 
 def create_account(request):
 
@@ -213,11 +223,29 @@ def get_answer(request):
     else:
         result = "不正解です"
     return HttpResponse(result)
-#いいねの関数
-def like(request,article_id):
+#面白いの関数
+def interesting(request,article_id):
     try:
         article=Article.objects.get(pk=article_id)
-        article.like+=1
+        article.interesting+=1
+        article.save()
+    except Article.DoesNotExist:
+        raise Http404("Article does not exist")
+    return redirect(detail,article_id)
+#難しいの関数
+def difficult(request,article_id):
+    try:
+        article=Article.objects.get(pk=article_id)
+        article.difficult+=1
+        article.save()
+    except Article.DoesNotExist:
+        raise Http404("Article does not exist")
+    return redirect(detail,article_id)
+#解きやすいの関数
+def easy(request,article_id):
+    try:
+        article=Article.objects.get(pk=article_id)
+        article.easy+=1
         article.save()
     except Article.DoesNotExist:
         raise Http404("Article does not exist")
