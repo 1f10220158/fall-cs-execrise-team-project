@@ -7,6 +7,7 @@
     <title>BreakingCipher.jp/sharePlatformSearch.html</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/sharePlatformSearch.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
+    <script type="text/javasript" src="{% static 'app1/js/index.js' %}"></script>
 </head>
 
 <body>
@@ -73,7 +74,12 @@
                                     <p class="user">匿名ID さん</p>
                                     <p class="postTime">投稿日: {{ article.post_time }}</p>
                                     {% endif %}
-
+                                    <a onclick="interesting({{article.id}});">
+                                        面白い!:<span id="interesting{{article.id}}">{{article.interesting}}</span></a>
+                                    <a onclick="difficult({{article.id}});">
+                                        解きがいがある!<span id="difficult{{article.id}}">{{article.difficult}}</span></a>
+                                    <a onclick="easy({{article.id}});">
+                                                解きやすい!:<span id="easy{{article.id}}">{{article.easy}}</span></a>
                                     <p class="content">{{ article.content }}</p>
                                    
                                     
