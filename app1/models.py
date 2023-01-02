@@ -84,4 +84,4 @@ class UserAnsweredArticle(models.Model):
 class Like(models.Model):
     article=models.ForeignKey(Article,on_delete=models.CASCADE)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    timestamp=models.DateTimeField(defalut=timezone.now)
+    timestamp=models.DateTimeField(default=timezone.now)
