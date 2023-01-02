@@ -219,3 +219,11 @@ particlesJS("particles-js",{
     },
     "retina_detect": true
   });
+  function callback(json){let element=document.getElementById('interesting'+json.id);element.textContent=json.interesting;}
+  function interesting(article_id){fetch('/api/articles/'+article_id+'/interesting').then(response=>response.json()).then(callback)}
+  function callback(json){let element=document.getElementById('difficult'+json.id);element.textContent=json.difficult;}
+  function interesting(article_id){fetch('/api/articles/'+article_id+'/difficult').then(response=>response.json()).then(callback)}
+  function callback(json){let element=document.getElementById('easy'+json.id);element.textContent=json.easy;}
+  function interesting(article_id){fetch('/api/articles/'+article_id+'/easy').then(response=>response.json()).then(callback)}
+  
+  
