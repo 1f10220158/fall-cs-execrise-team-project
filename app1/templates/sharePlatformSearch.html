@@ -75,19 +75,7 @@
                                     {% endif %}
 
                                     <p class="content">{{ article.content }}</p>
-                                    <div> <a href="{% url 'sharePlatformSearch' %}?sort=interesting">Sort by interesting</a>
-                                          <a href="{% url 'sharePlatformsearch' %}?sort=date">Sort by Date</a>
-                                        <a href="{% url 'sharePlatformSearch' %}?sort=difficult">Sort by difficult</a>
-                                        <a href="{% url 'sharePlatformSearch' %}?sort=easy">Sort by easy</a></div>
-                                    <div> <a href="{% url 'interesting' article.id %}">
-                                        Interesting:{{article.interesting}}
-                                        </a></div><!--面白いの数を表示・面白いを押すことができるボタン-->
-                                        <div> <a href="{% url 'difficult' article.id %}">
-                                            Difficult:{{article.difficult}}
-                                            </a></div><!--難しいの数を表示・難しいを押すことができるボタン-->
-                                            <div> <a href="{% url 'easy' article.id %}">
-                                                Easy:{{article.easy}}
-                                                </a></div><!--解きやすいの数を表示・解きやすいを押すことができるボタン-->
+                                   
                                 </a>
                             </div>
                             {% endfor %}
