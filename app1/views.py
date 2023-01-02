@@ -226,29 +226,32 @@ def get_answer(request):
         result = "不正解です"
     return HttpResponse(result)
 #面白いの関数
-def interesting(request,article_id):
+def api_interesting(request,article_id):
     try:
         article=Article.objects.get(pk=article_id)
         article.interesting+=1
         article.save()
     except Article.DoesNotExist:
         raise Http404("Article does not exist")
-    return redirect(detail,article_id)
+    result={'id':article_id,'interesting':article.interesting}
+    return JsonResponse(result)
 #難しいの関数
-def difficult(request,article_id):
+def api_difficult(request,article_id):
     try:
         article=Article.objects.get(pk=article_id)
         article.difficult+=1
         article.save()
     except Article.DoesNotExist:
         raise Http404("Article does not exist")
-    return redirect(detail,article_id)
+    result={'id':article_id,'difficult':article.difficult}
+    return JsonResponse(result)
 #解きやすいの関数
-def easy(request,article_id):
+def api_easy(request,article_id):
     try:
         article=Article.objects.get(pk=article_id)
         article.easy+=1
         article.save()
     except Article.DoesNotExist:
         raise Http404("Article does not exist")
-    return redirect(detail,article_id)
+    result={'id':article_id,'easy':article.easy}
+    return JsonResponse(result)
