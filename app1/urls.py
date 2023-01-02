@@ -11,7 +11,7 @@ urlpatterns = [
     path("sharePlatformPostEnd", views.share_platform_post_end, name="sharePlatformPostEnd"),
     path("articlesSearch", views.articles_search, name="articlesSearch"),
     path("getAnswer", views.get_answer, name="getAnswer"),
-    path('<int:article_id>/interesting',views.interesting,name='interesting'),#面白いのURL
-    path('<int:article_id>/difficult',views.difficult,name='difficult'),#難しいのURL
-    path('<int:article_id>/easy',views.easy,name='easy'),#解きやすいのURL
+    path('api/articles/<int:article_id>/interesting',views.api_like),#面白いのURL
+    path('api/articles/<int:article_id>/difficult',views.api_difficult),#難しいのURL
+    path('api/articles/<int:article_id>/easy',views.api_easy),#解きやすいのURL
 ]
