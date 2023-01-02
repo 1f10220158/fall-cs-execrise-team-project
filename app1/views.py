@@ -223,30 +223,3 @@ def get_answer(request):
     else:
         result = "不正解です"
     return HttpResponse(result)
-#面白いの関数
-def interesting(request,article_id):
-    try:
-        article=Article.objects.get(pk=article_id)
-        article.interesting+=1
-        article.save()
-    except Article.DoesNotExist:
-        raise Http404("Article does not exist")
-    return redirect(detail,article_id)
-#難しいの関数
-def difficult(request,article_id):
-    try:
-        article=Article.objects.get(pk=article_id)
-        article.difficult+=1
-        article.save()
-    except Article.DoesNotExist:
-        raise Http404("Article does not exist")
-    return redirect(detail,article_id)
-#解きやすいの関数
-def easy(request,article_id):
-    try:
-        article=Article.objects.get(pk=article_id)
-        article.easy+=1
-        article.save()
-    except Article.DoesNotExist:
-        raise Http404("Article does not exist")
-    return redirect(detail,article_id)
