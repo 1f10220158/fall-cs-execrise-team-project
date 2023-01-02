@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse, JsonResponse
 from app1.models import *
 import re
+from django.http import Http404, JsonResponse
+
 
 def index(request):
     if request.method == "POST":
