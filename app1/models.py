@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class User(models.Model):
     user_id = models.CharField(
@@ -80,3 +81,7 @@ class UserAnsweredArticle(models.Model):
     id = models.AutoField(
         primary_key = True,
     )
+class Like(models.Model):
+    article=models.ForeignKey(Article,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    timestamp=models.DateTimeField(defalut=timezone.now)
