@@ -4,7 +4,6 @@ from app1.models import *
 import re
 from django.http import Http404, JsonResponse
 from app1.models import Article
-from .models import Article,Like
 
 
 def index(request):
