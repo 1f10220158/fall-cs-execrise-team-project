@@ -19,7 +19,8 @@ h1 {
     
     font-size: 18px;
 }
-a{text-decoration: none;}
+a{text-decoration: none;
+color: black;}
 a:hover{text-decoration: underline;
 color: blue;}
 .label {
