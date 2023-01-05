@@ -178,11 +178,11 @@ h1 {
 
 #pageMove {
     padding-top: 10px;
-    
+    text-decoration: none;
 }
-a{text-decoration: none;}
-a:hover{text-decoration: underline;
-color: brown;}
+
+#pageMove:hover{text-decoration: underline;
+color:blue;}
 
 .articleHeader span {
     font-weight: normal;
