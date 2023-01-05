@@ -63,6 +63,7 @@ h1 {
     text-decoration: none;
     color: black;
 }
+.article a:hover{text-decoration: underline;}
 
 .article a p {
     margin: 0;
@@ -182,7 +183,7 @@ h1 {
 }
 
 #pageMove:hover{text-decoration: underline;
-color:blue;}
+}
 
 .articleHeader span {
     font-weight: normal;
