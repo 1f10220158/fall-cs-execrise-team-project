@@ -54,8 +54,7 @@
 
                             {% for article in articles %}
                             <div class="article">
-                                <a href="#preview"
-                                    onclick="articleClick('media/{{ article.article_data }}', '{{ article.article_id }}')">
+                                <a href="#preview" onclick="articleClick('media/{{ article.article_data }}', '{{ article.article_id }}')">
                                     <div class="articleHeader">
                                         <h2>{{ article.title }}
                                             {% for answered_article in answered %}
@@ -125,7 +124,7 @@
             const userID = "{{ userid | safe }}";
             const userElement = document.getElementById('user');
             userElement.textContent = userID;
-            userElement.removeAttribute("href");
+            userElement.setAttribute("href", "{% url 'userPage' %}");
         }
      
         const previewElement = document.getElementById("preview");

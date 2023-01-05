@@ -11,5 +11,5 @@ urlpatterns = [
     path("sharePlatformPostEnd", views.share_platform_post_end, name="sharePlatformPostEnd"),
     path("articlesSearch", views.articles_search, name="articlesSearch"),
     path("getAnswer", views.get_answer, name="getAnswer"),
-   
+    path("userPage", views.user_page, name="userPage"),
 ]

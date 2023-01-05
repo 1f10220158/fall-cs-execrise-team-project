@@ -94,7 +94,7 @@
             const userID = "{{ userid | safe }}";
             const userElement = document.getElementById('user');
             userElement.textContent = userID;
-            userElement.removeAttribute("href");
+            userElement.setAttribute("href", "{% url 'userPage' %}");
         }
 
         /* 投稿機能 */

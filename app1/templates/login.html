@@ -61,13 +61,6 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
     <script src="{% static 'js/index.js' %}" defer></script>
     <script>
-        if ("{{ userid | safe }}") {
-            const userID = "{{ userid | safe }}";
-            const userElement = document.getElementById('user');
-            userElement.textContent = userID;
-            userElement.removeAttribute("href");
-        }
-
         const loginFormElement = document.getElementById("loginForm");
 
         loginFormElement.addEventListener("submit", (event) => {

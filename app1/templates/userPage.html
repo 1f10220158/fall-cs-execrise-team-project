@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BreakingCipher.jp/userPage.html</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/userPage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/common.css' %}">
+</head>
+
+<body>
+    <div id="particles-js">
+        <div id="mist">
+            <div id="wrapper">
+                <div id="header">
+                    <nav>
+                        <ul>
+                            <li class="border"><a href="{% url 'index' %}">Home</a></li>
+                            <li class="border"><a href="{% url 'sharePlatformSearch' %}">Article Search</a></li>
+                            <li class="border"><a href="{% url 'sharePlatformPost' %}">Article Post</a></li>
+                            <li><a href="{% url 'userPage' %}" id="user">{{ userid }}</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div id="main">
+                    <div id="userInformation">
+                        <h1 class="user">{{ userid }} さん</h1>
+                        <p id="articleNum">投稿数：{{ articles|length }}</p>
+                    </div>
+
+                    <div id="mainMiddleBox">
+                        <div id="leftBox">
+                            <h2>{{ userid }} さんの投稿</h2>
+                            <div id="articleBox">
+
+                                {% if articles %}
+
+                                {% for article in articles %}
+                                <div class="article">
+                                    <a href="#preview"
+                                        onclick="articleClick('media/{{ article.article_data }}', '{{ article.article_id }}', '{{ article.title }}', '{{ article.post_time }}', '{{ article.content }}')">
+
+                                        <h3>{{ article.title }}</h3>
+                                        <p>投稿日: {{ article.post_time }}</p>
+                                        <p>{{ article.content }}</p>
+                                    </a>
+                                </div>
+                                {% endfor %}
+
+                                {% else %}
+                                <div class="noArticle">
+                                    <p>記事が見つかりませんでした。</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div id="rightBox">
+
+                            <div id="preview">
+                                <div id="articleFont">
+                                    <p>Article</p>
+                                </div>
+                            </div>
+                            <div id="deleteBoxBefore">
+                                <a href="#" id="delete"></a>
+                                <form id="formBox">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="articleId" id="articleId" value="">
+                                    <input type="hidden" name="userid" id="userid" value="{{ userid }}">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="coverBox"></div>
+    <div id="modalBox"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js" defer></script>
+    <script src="{% static 'js/index.js' %}" defer></script>
+    <script>
+        const previewElement = document.getElementById("preview");
+
+        function articleClick(articleData, articleId, articleTitle, postTime, articleContent) {
+
+            //記事を表示する機能
+            const iframe = '<iframe src="' + articleData + '#page=1&scrollbar=0" width="100%" height="100%"' +
+                ' scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>';
+            previewElement.innerHTML = iframe;
+
+            const deleteElement = document.getElementById("delete");
+            const deleteBoxBeforeElement = document.getElementById("deleteBoxBefore")
+            deleteElement.textContent = "この記事を削除する";
+            deleteBoxBeforeElement.setAttribute("id", "deleteBoxAfter");
+
+
+            //delete aタグをクリックした後の処理
+            const formBoxElement = document.getElementById("formBox");
+            const modalElement = document.getElementById("modalBox");
+            const coverElement = document.getElementById("coverBox");
+
+            deleteElement.addEventListener("click", () => {
+                modalElement.innerHTML =
+                    `<div id="alart">
+                        <h2>この記事でよろしいですか?</h2>
+                        <div id="deleteArticle">
+                            <h3>` + articleTitle + `</h3>
+                            <p>投稿日: ` + postTime + `</p>
+                            <p>` + articleContent + `</p>
+                        </div>
+                        <div id="alartUnder">
+                            <a href="#" class="select" id="yes">はい</a>
+                            <a href="#" class="select" id="no">いいえ</a>
+                        </div>
+                    </div>`;
+
+                coverElement.innerHTML = `<div id="cover"></div>`;
+
+                const yesElement = document.getElementById("yes");
+                const noElement = document.getElementById("no");
+
+                yesElement.addEventListener("click", () => {
+                    formBoxElement.dispatchEvent(new Event('submit'));
+                    modalElement.innerHTML =
+                        `<div id="alart">
+                        <h2>完了しました</h2>
+                        <div id="backBox">
+                            <a href="{% url 'userPage' %}" id="backLink">戻る</a>
+                        </div>
+                    </div>`;
+
+                    const backLinkElement = document.getElementById("backLink");
+
+                    backLinkElement.addEventListener("click", () => {
+                        modalElement.innerHTML = "";
+                        coverElement.innerHTML = "";
+                    })
+                });
+
+                noElement.addEventListener("click", () => {
+                    modalElement.innerHTML = "";
+                    coverElement.innerHTML = "";
+                })
+            });
+
+            //articleId, useridをサーバー側に送信
+            formBoxElement.addEventListener("submit", (event) => {
+                event.preventDefault();
+
+                //articleIdをinputに埋め込む
+                const articleIdElement = document.getElementById("articleId");
+                articleIdElement.value = articleId;
+                const form = new FormData(formBoxElement);
+
+                fetch("{% url 'userPage' %}", {
+                    method: "POST",
+                    body: form,
+                });
+            });
+        };
+    </script>
+</body>
+
+</html>
