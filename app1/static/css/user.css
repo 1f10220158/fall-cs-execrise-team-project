@@ -130,3 +130,6 @@
     color: rgb(59, 59, 59);
     border-radius: 15px;
 }
+a{text-decoration: none;}
+a:hover{text-decoration: underline;
+color: navy;}
