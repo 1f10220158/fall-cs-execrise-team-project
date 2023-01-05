@@ -35,8 +35,6 @@
     
 }
 
-
-
 #error {
     font-size: 16px;
     color: rgb(159, 0, 0);
@@ -128,6 +126,12 @@
     color: rgb(59, 59, 59);
     border-radius: 15px;
 }
-a{text-decoration: none;}
-a:hover{text-decoration: underline;
-color: navy;}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: navy;
+}
