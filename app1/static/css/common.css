@@ -85,3 +85,6 @@ ul li a:hover {
     background-color:#797979;
     border-radius: 5px;
  }
+ a{text-decoration: none;}
+ a:hover{text-decoration: underline;
+color: navy;}
