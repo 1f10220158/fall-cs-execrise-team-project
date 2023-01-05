@@ -182,7 +182,7 @@ h1 {
 }
 a{text-decoration: none;}
 a:hover{text-decoration: underline;
-color: blue;}
+color: gray;}
 
 .articleHeader span {
     font-weight: normal;
